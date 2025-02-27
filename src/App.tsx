@@ -1,9 +1,9 @@
-import './App.css'
-import FormLayout from './layouts/FormLayout'
+import './App.css';
+import WebLayout from './layouts/WebLayout';
 
 function App() {
   return (
-    <FormLayout/>
+    <WebLayout />
   )
 }
 

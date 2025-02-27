@@ -1,6 +1,13 @@
+import { useState } from "react";
 import PersonalForm from "../forms/PersonalForm";
 
 function FormLayout() {
+    const [progressForm, setProgressForm] = useState(1);
+
+    const handleProgressForm = () => {
+        setProgressForm(progressForm + 1);
+    }
+
     return (
         <div className="flex gap-10 items-center">
             <ul className="flex flex-col gap-5 text-lg">
@@ -12,7 +19,11 @@ function FormLayout() {
                     <i className="fa-sharp fa-solid fa-check"></i>
                 </li>
             </ul>
-            <PersonalForm/>
+            {/* to do switch
+            
+                if progress form is 1, show Personal Form ...
+            */}
+            <PersonalForm progress={handleProgressForm} />
         </div>
     );
 }

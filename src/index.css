@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-    --font-display: "Satoshi", "sans-serif";
+    /* FONTS */
+    --font-clash: "Clash Display", sans-serif;
+    --font-inter: "Inter", sans-serif;
+
+    /* COLORS */
+    --color-lime-500: oklch(93.33% 0.2376 121.63);
 }
+
+/* https://fonts.google.com/specimen/Squada+One?categoryFilters=Feeling:%2FExpressive%2FStiff */

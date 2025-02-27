@@ -1,9 +1,9 @@
 import { useState } from "react"
 import Input from "../components/Input"
-import { PersonalFormData } from "../interfaces/form.interfaces";
-import { validateLength } from "../utils/validation";
+import { PersonalFormData, PersonalFormProps } from "../interfaces/form.interfaces"
+import { validateLength } from "../utils/validation"
 
-function PersonalForm() {
+function PersonalForm({progress}:PersonalFormProps) {
     const [formData, setFormData] = useState<PersonalFormData>({
         name: "",
         email: "",
@@ -45,6 +45,7 @@ function PersonalForm() {
                 type="text"
                 onChange={handleChange}
             />
+            <button onClick={progress}>Next</button>
             <div className="relative w-[360px]">
                 <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-0 h-0 
                     border-t-[12px] border-t-transparent

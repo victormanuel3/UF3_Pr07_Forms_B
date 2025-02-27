@@ -5,3 +5,7 @@ export interface PersonalFormData {
     gender: 'Masculino' | 'Femenino' | 'Otro',
     preferences: 'Leer' | 'Deportes' | 'Viajar' | 'Cine'
 }
+
+export interface PersonalFormProps {
+    progress: () => void
+}
