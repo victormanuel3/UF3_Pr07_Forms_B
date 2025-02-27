@@ -59,7 +59,7 @@ function PersonalForm() {
             <Textarea
                 label="Prueba"
                 placeholder="placeholder del textarea"
-                min={200}
+                max={200}
             />
         </div>
         

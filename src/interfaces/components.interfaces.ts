@@ -18,6 +18,6 @@ export interface SelectProps {
 export interface TextareaProps {
     label: string,
     placeholder: string,
-    min: number
+    max: number
 }
 
