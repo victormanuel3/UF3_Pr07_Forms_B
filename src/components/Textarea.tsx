@@ -6,14 +6,13 @@ function Textarea({ label, placeholder, max }: TextareaProps) {
   const [error, setError] = useState(false);
   
   const handleCharCount = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const textValue = event.target.value
+    const textValue = event.target.value.trim()
     setCharCount(textValue.length)
     setError(textValue.length >= max)
   }
 
   return (
     <div className="flex flex-col w-full max-w-sm space-y-1">
-
       <label 
         htmlFor="prueba" 
         className="text-sm font-medium text-justify text-gray-700"
@@ -26,7 +25,7 @@ function Textarea({ label, placeholder, max }: TextareaProps) {
         name="prueba"
         placeholder={placeholder}
         maxLength={max}
-        className={`border  p-2 outline-none rounded-xl ${error ? 'border-red-500' : 'border-gray-300'}`}
+        className={`border p-2 h-35 outline-none rounded-xl text-sm ${error ? 'border-red-500' : 'border-gray-300'}`}
         onChange={handleCharCount}
       />
 

@@ -7,7 +7,7 @@ function Input(props: InputProps) {
             <label className="flex flex-col gap-1 items-start">
                 {label}
                 <input
-                    className="h-11 w-full border rounded-lg pl-3"
+                    className="h-10 w-full border rounded-lg pl-3 text-sm"
                     name={name}
                     type={type}
                     value={value}
