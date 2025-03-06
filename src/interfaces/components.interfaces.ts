@@ -11,6 +11,7 @@ export interface InputProps {
 
 export interface SelectProps {
     label: string,
+    value: string,
     placeholder: string,
     options: string[],
 }
@@ -21,3 +22,9 @@ export interface TextareaProps {
     max: number
 }
 
+export interface CheckboxProps<T> {
+    label: string,
+    selectedOptions: T[],
+    onSelectOption: (option: T) => void,
+    options: T[]
+}

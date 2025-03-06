@@ -9,6 +9,7 @@ function Select(props: SelectProps) {
     
     const handleOptionClick = (option: string) => {
         setValue(option);
+        handleToogleDropdown()
     }
 
     const handleToogleDropdown = () => {
@@ -35,22 +36,22 @@ function Select(props: SelectProps) {
         <div className="relative" ref={selectRef} >
             <label className="flex flex-col gap-1 items-start">
                 {label}
-                <div className="relative h-11 w-full">
+                <div className="relative h-10 w-full">
                     <input
                         type="text"
                         value={value}
                         placeholder={placeholder}
                         readOnly
                         onClick={handleToogleDropdown}
-                        className="h-full w-full border rounded-lg pl-3 outline-none"
+                        className="h-full w-full border rounded-lg pl-3 outline-none cursor-pointer text-sm"
                     />
-                    <i className={`fa-sharp fa-solid fa-angle-down absolute top-1/2 right-3 -translate-y-1/2 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}></i>
+                    <i className={`fa-sharp fa-regular fa-angle-down absolute top-1/2 right-3 -translate-y-1/2 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}></i>
                 </div>
             </label> 
             {isOpen && (
-                <ul className="absolute top-full mt-0.5 bg-white border rounded-lg w-full">
+                <ul className="absolute top-full mt-0.5 bg-white border border-gray-400 p-0.5 rounded-lg w-full">
                     {options.map((option) => (
-                        <li className="text-justify px-3 py-1.5 cursor-pointer select-none" key={option} onClick={() => handleOptionClick(option)}>
+                        <li className="text-justify px-3 py-1.5 cursor-pointer text-sm select-none" key={option} onClick={() => handleOptionClick(option)}>
                             {option}
                         </li>
                     ))}
