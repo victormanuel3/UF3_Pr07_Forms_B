@@ -1,12 +1,18 @@
 @import "tailwindcss";
 
+/* FONTS IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
 @theme {
     /* FONTS */
-    --font-clash: "Clash Display", sans-serif;
     --font-inter: "Inter", sans-serif;
+    --font-sqada: "Squada One", sans-serif;
+    --font-gabarito: "Gabarito", sans-serif;
 
     /* COLORS */
     --color-lime-500: oklch(93.33% 0.2376 121.63);
 }
+
 
 /* https://fonts.google.com/specimen/Squada+One?categoryFilters=Feeling:%2FExpressive%2FStiff */

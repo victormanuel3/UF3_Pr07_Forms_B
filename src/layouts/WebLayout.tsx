@@ -2,14 +2,16 @@ import FormLayout from './FormLayout';
 
 const WebLayout = () => {
     return (
-        <div>
-            <header></header>
+        <>
+            <header className="w-screen h-24 mb-24 font-gabarito bg-lime-500 text-black">HEADER</header>
 
-            <p className="font-mono">test</p>
-            <FormLayout  />
+            <div>
+                <FormLayout />
 
-            <footer></footer>
-        </div>
+            </div>
+
+            <footer className="w-screen h-60 mt-24 font-gabarito bg-lime-500 text-black">FOOTER</footer>
+        </>
     )
 }
 

@@ -12,10 +12,10 @@ export function validateAge(yearOfBirth: number) {
     return year - yearOfBirth < 17 
 }
 
-export function validateBirthDateFormat(birthDate: string) {
-    const birthDateRegex = //;
-    return birthDateRegex.test(birthDate);
-}
+// export function validateBirthDateFormat(birthDate: string) {
+//     const birthDateRegex = //;
+//     return birthDateRegex.test(birthDate);
+// }
 
 export function validateEmailFormat(email: string) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.stucom\.com$/;
