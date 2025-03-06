@@ -1,18 +1,35 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Input from "../components/Input"
 import { PersonalFormData } from "../interfaces/form.interfaces";
 import { validateLength } from "../utils/validation";
 import Select from "../components/Select";
-import Textarea from "../components/Textarea";
+import Checkbox from "../components/Checkbox";
 
 function PersonalForm() {
     const [formData, setFormData] = useState<PersonalFormData>({
         name: "",
         email: "",
         birthDate: "",
-        gender: "Femenino",
-        preferences: 'Cine'
+        gender: "",
+        preferences: []
     });
+
+    useEffect(() => {
+        console.log(formData)
+    },[formData.preferences])
+
+    const handlePreferencesChanges = (option: 'Leer' | 'Deportes' | 'Viajar' | 'Cine') => {
+        if (!formData.preferences.includes(option))
+            setFormData({
+                ...formData,
+                preferences: [...formData.preferences, option]
+            })
+        else 
+            setFormData({
+                ...formData,
+                preferences: formData.preferences.filter((opt => opt !== option))
+            })
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target
@@ -22,9 +39,8 @@ function PersonalForm() {
 
     return (
         <div className="flex flex-col gap-5 w-79 p-6 border rounded-3xl">
-            <h1 className="font-normal text-2xl uppercase">personal form</h1>
             <Input
-                label="Name"
+                label="Nombre"
                 value={formData.name}
                 name="name"
                 placeholder="Enter your name"
@@ -40,7 +56,7 @@ function PersonalForm() {
                 onChange={handleChange}
             />
             <Input
-                label="Birthdate"
+                label="Fecha de nacimiento"
                 value={formData.birthDate}
                 name="birthDate"
                 placeholder="mm/dd/yyyy"
@@ -48,21 +64,29 @@ function PersonalForm() {
                 onChange={handleChange}
             />
             <Select
-                label="Select"
+                label="Sexo"
+                value={formData.gender}
                 placeholder="Select a option"
                 options={[
-                    'manuel',
-                    'akisha',
-                    'monica'
+                    'Femenino',
+                    'Masculino',
+                    'Otro'
                 ]}
             />
-            <Textarea
-                label="Prueba"
-                placeholder="placeholder del textarea"
-                max={200}
+            <Checkbox<'Leer' | 'Deportes' | 'Viajar' | 'Cine'>
+                selectedOptions={formData.preferences}
+                onSelectOption={handlePreferencesChanges}
+                    options={[
+                    'Leer',
+                    'Deportes',
+                    'Viajar',
+                    'Cine'
+                ]}
+                label="Preferencias"
             />
         </div>
-        
     )
 }
 export default PersonalForm
+
+
