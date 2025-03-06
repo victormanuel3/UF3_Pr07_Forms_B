@@ -10,5 +10,14 @@ export interface InputProps {
 }
 
 export interface SelectProps {
-
+    label: string,
+    placeholder: string,
+    options: string[],
 }
+
+export interface TextareaProps {
+    label: string,
+    placeholder: string,
+    max: number
+}
+

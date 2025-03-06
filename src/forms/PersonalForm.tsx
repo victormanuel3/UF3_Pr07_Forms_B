@@ -1,9 +1,11 @@
 import { useState } from "react"
 import Input from "../components/Input"
-import { PersonalFormData, PersonalFormProps } from "../interfaces/form.interfaces"
-import { validateLength } from "../utils/validation"
+import { PersonalFormData } from "../interfaces/form.interfaces";
+import { validateLength } from "../utils/validation";
+import Select from "../components/Select";
+import Textarea from "../components/Textarea";
 
-function PersonalForm({progress}:PersonalFormProps) {
+function PersonalForm() {
     const [formData, setFormData] = useState<PersonalFormData>({
         name: "",
         email: "",
@@ -45,17 +47,20 @@ function PersonalForm({progress}:PersonalFormProps) {
                 type="text"
                 onChange={handleChange}
             />
-            <button onClick={progress}>Next</button>
-            <div className="relative w-[360px]">
-                <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-0 h-0 
-                    border-t-[12px] border-t-transparent
-                    border-r-[12px] border-r-[#D9D9D9]
-                    border-b-[12px] border-b-transparent">
-                </div>
-                <div className="w-full bg-[#D9D9D9] rounded-xl p-4 min-h-[66px]">
-                    <p className="text-gray-700">Reglas de validación</p>
-                </div>
-            </div>
+            <Select
+                label="Select"
+                placeholder="Select a option"
+                options={[
+                    'manuel',
+                    'akisha',
+                    'monica'
+                ]}
+            />
+            <Textarea
+                label="Prueba"
+                placeholder="placeholder del textarea"
+                max={200}
+            />
         </div>
         
     )
