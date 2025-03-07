@@ -13,6 +13,8 @@ i18n.use(initReactI18next).init({
     es: spanishContent,
   },
 
+  lng: navigator.language.split("-")[0],
+
   fallbackLng: "en",
 
   interpolation: {
