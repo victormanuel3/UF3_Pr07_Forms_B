@@ -2,7 +2,8 @@ import { useState } from "react";
 import PersonalForm from "../forms/PersonalForm";
 
 function FormLayout() {
-    const [header, setHeader] = useState("Formulario Personal")
+    const [header, setHeader] = useState("Formulario Personal");
+    const [rules, setRules] = useState("RULES");
     const [progressForm, setProgressForm] = useState(1);
 
     const handleProgressForm = () => {
@@ -11,8 +12,8 @@ function FormLayout() {
 
     return (
         <div className="flex justify-center gap-40">
-            <div className="w-min">
-                <h1 className="uppercase font-bold text-7xl">{header}</h1>
+            <div className="w-min flex items-center">
+                <h1 className="uppercase font-bold text-7xl font-righteous">{header}</h1>
             </div>
             <div className="flex gap-10 items-center">
                 <ul className="flex flex-col gap-5 text-lg">
@@ -25,6 +26,11 @@ function FormLayout() {
                     </li>
                 </ul>
                 <PersonalForm/>
+
+                <div className="ml-20">
+                    <h3 className="uppercase font-bold text-5xl mb-5 font-righteous">{rules}</h3>
+                    <div className="flex flex-col gap-5 w-79 h-50 p-6 shadow-lg rounded-3xl bg-stone-50"></div>
+                </div>
             </div>
         </div>
     );
