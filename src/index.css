@@ -17,3 +17,7 @@
 }
 
 /* https://fonts.google.com/specimen/Squada+One?categoryFilters=Feeling:%2FExpressive%2FStiff */
+
+polygon, rect {
+    fill: var(--color-lime-500);
+}
