@@ -1,12 +1,27 @@
 @import "tailwindcss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FONTS IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Righteous&display=swap');
+
 @theme {
     /* FONTS */
-    --font-clash: "Clash Display", sans-serif;
     --font-inter: "Inter", sans-serif;
+    --font-anton: "Anton", sans-serif;
+    --font-righteous: "Righteous", sans-serif;
+    --font-gabarito: "Gabarito", sans-serif;
 
     /* COLORS */
     --color-lime-500: oklch(93.33% 0.2376 121.63);
 }
 
 /* https://fonts.google.com/specimen/Squada+One?categoryFilters=Feeling:%2FExpressive%2FStiff */
+
+polygon, rect {
+    fill: var(--color-lime-500);
+}

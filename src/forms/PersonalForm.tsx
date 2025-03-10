@@ -38,7 +38,7 @@ function PersonalForm() {
     }
 
     return (
-        <div className="flex flex-col gap-5 w-79 p-6 border rounded-3xl">
+        <div className="flex flex-col gap-5 w-79 p-6 shadow-lg rounded-3xl bg-stone-50">
             <Input
                 label="Nombre"
                 value={formData.name}
