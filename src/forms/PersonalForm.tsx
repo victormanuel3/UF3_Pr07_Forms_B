@@ -87,6 +87,6 @@ function PersonalForm() {
         </div>
     )
 }
-export default PersonalForm
+ export default PersonalForm
 
 

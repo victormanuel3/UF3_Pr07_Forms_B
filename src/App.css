@@ -1,5 +1,4 @@
 #root {
-  max-width: 1820px;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -39,4 +38,15 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* BANNER */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-20%); }
+}
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 20s linear infinite;
 }

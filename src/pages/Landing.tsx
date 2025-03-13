@@ -71,7 +71,7 @@ function Landing() {
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
                             </svg>
                         </button>
-                        <button className="bg-lime-500 rounded-full px-5 py-1 ml-2">RESTART</button>
+                        <button className="bg-lime-500 rounded-full px-4 py-2 ml-2 text-sm text-gray-900">START</button>
                     </div>
                     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-language"></div>
                 </div>
@@ -89,26 +89,12 @@ function Landing() {
                         </span>
                     ))}
                 </div>
-
-                <style>
-                    {`
-          @keyframes marquee {
-            from { transform: translateX(0); }
-            to { transform: translateX(-20%); }
-          }
-          .animate-marquee {
-            display: flex;
-            width: 200%;
-            animation: marquee 20s linear infinite;
-          }
-        `}
-                </style>
             </div>
 
             <div className="relative">
                 <img src="..\..\public\img\bg-lime.jpg" alt="Lime Background" className="contrast-50 w-full" />
-                <div className="object-center aboslute">
-                    <button>TEST</button>
+                <div className="absolute bottom-0 left-0">
+                    <button className="inset-x-0 bottom-0 bg-lime-500 rounded-full px-4 py-2 ml-2 text-sm text-gray-900">START</button>                
                 </div>
             </div>
 
