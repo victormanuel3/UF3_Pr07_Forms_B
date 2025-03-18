@@ -1,8 +1,11 @@
-export function validateLength(value: string, min: number, max?: number): boolean {
-    if (max === undefined)
-        return value.length >= min
+export function validateLength(
+  value: string,
+  min: number,
+  max?: number
+): boolean {
+  if (max === undefined) return value.length >= min;
 
-    return value.length >= min && value.length <= max
+  return value.length >= min && value.length <= max;
 }
 
 export function validateAge(birthDate: string, minimumAge: number): boolean {
