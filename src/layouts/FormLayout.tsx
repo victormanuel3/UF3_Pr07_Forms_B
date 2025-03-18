@@ -1,27 +1,91 @@
-import { useState } from "react";
-import PersonalForm from "../forms/PersonalForm";
+import { useEffect, useState } from "react";
+import { FormSection } from "../interfaces/form.interfaces";
+import DynamicForms from "../form/DynamicForms";
 
 function FormLayout() {
-    const [header, setHeader] = useState("Formulario Personal")
+    const [title, setTitle] = useState("")
+    const [progress, setProgress] = useState(1);
+    const [cuestionarios, setCuestionarios] = useState<FormSection[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isCompleted, setIsCompleted] = useState(false);
+
+    const handleNext = () => {
+        if (progress < cuestionarios.length) {
+            setProgress(progress + 1);
+            setTitle(cuestionarios[progress].titulo);
+        } else {
+            setIsCompleted(true);
+        }
+    };
+
+    useEffect(() => {
+        const fetchCuestionarios = async () => {
+            try {
+                const response = await fetch('/data/cuestionarios.json');
+                if (!response.ok) throw new Error('Error al cargar los datos');
+                const data = await response.json();
+                setCuestionarios(data);
+                setIsLoading(false);
+                if (data.length > 0) {
+                    setTitle(data[0].titulo);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                setIsLoading(false);
+            }
+        };
+        
+        fetchCuestionarios();
+    }, []);
+
     return (
-        <div className="flex justify-center gap-40">
+        <div className="flex justify-center gap-30">
             <div className="w-min">
-                <h1 className="uppercase font-bold text-7xl">{header}</h1>
+                <h1 className="uppercase font-bold text-5xl">{isCompleted ? "¡Completado!" : title}</h1>
             </div>
             <div className="flex gap-10 items-center">
-                <ul className="flex flex-col gap-5 text-lg">
-                    <li className="w-14 flex justify-center items-center h-14 rounded-full bg-gray-200">1</li>
-                    <li className="w-14 flex justify-center items-center h-14 rounded-full bg-gray-200">2</li>
-                    <li className="w-14 flex justify-center items-center h-14 rounded-full bg-gray-200">3</li>
-                    <li className="w-14 flex justify-center items-center h-14 rounded-full bg-gray-200">4</li>
-                    <li className="w-14 flex justify-center items-center h-14 rounded-full bg-gray-200">
-                        <i className="fa-sharp fa-solid fa-check"></i>
-                    </li>
-                </ul>
-                <PersonalForm/>
+                {isLoading ? (
+                    <p>Cargando formularios...</p>
+                ) : (
+                    <>
+                        <ul className="flex flex-col gap-5 text-lg">
+                            {cuestionarios.map((_, index) => (
+                                <li
+                                    key={index}
+                                    className={`w-14 flex justify-center text-black items-center h-14 rounded-full
+                                        ${
+                                            index + 1 <= progress ? "bg-lime-300" : "bg-gray-300"
+                                        }`
+                                    }
+                                >
+                                    {index + 1}
+                                </li>
+                            ))}
+                            <li className={`w-14 flex justify-center text-black items-center h-14 rounded-full
+                                ${
+                                    isCompleted ? "bg-lime-300" : "bg-gray-300"
+                                }`}
+                            >
+                                <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.0584 0.142906C18.3696 1.1173 16.461 2.51228 14.6663 4.08545C13.2199 5.35361 11.6773 6.88182 10.2486 8.46141C9.26295 9.55299 8.20026 10.8228 7.24031 12.0572C6.90641 12.4874 6.04278 13.64 5.77149 14.0205C5.63183 14.2163 5.55478 14.311 5.53873 14.3062C5.52588 14.303 4.30427 13.6159 2.82582 12.7812L0.136996 11.261L0.0759953 11.33C0.0438899 11.3686 0.00857399 11.4103 0.000547644 11.4247C-0.0138998 11.4504 0.214048 11.7169 6.02673 18.4574L6.49386 19H6.55807H6.62228L6.98668 18.2728C8.78618 14.6915 10.5536 11.7426 12.5586 8.9751C14.769 5.92669 17.2716 3.11907 20.0873 0.532986C20.2879 0.34838 20.4517 0.192669 20.4517 0.186248C20.4517 0.178222 20.3409 0.0209056 20.32 3.70978e-05C20.3168 -0.00156817 20.1996 0.0626426 20.0584 0.142906Z" fill="black"/>
+                                </svg>
+                            </li>
+                        </ul>
+                        {!isCompleted ? (
+                            <DynamicForms
+                                cuestionarios={cuestionarios}
+                                currentFormIndex={progress - 1}
+                                onNext={handleNext}        
+                            />
+                        ): (
+                            <div>
+                                <p>Respuestas</p>            
+                            </div>
+                        )}    
+                    </>
+                )}
             </div>
         </div>
     );
 }
-
 export default FormLayout
