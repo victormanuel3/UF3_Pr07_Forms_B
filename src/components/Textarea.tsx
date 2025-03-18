@@ -1,37 +1,62 @@
-import { ChangeEvent, useState } from "react"
+import { useEffect, useState } from "react"
 import { TextareaProps } from "../interfaces/components.interfaces"
+import ValidationToolTip from "./ValidationToolTip";
 
-function Textarea({ label, placeholder, max }: TextareaProps) {
-  const [charCount, setCharCount] = useState(0);
+function Textarea({ label, placeholder, max, rules, value, name, onChange }: TextareaProps) {
+  const [charCount, setCharCount] = useState(value ? value.length : 0);
   const [error, setError] = useState(false);
-  
-  const handleCharCount = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const textValue = event.target.value.trim()
-    setCharCount(textValue.length)
-    setError(textValue.length >= max)
-  }
+  const [showRules, setShowRules] = useState(false)
+  const [launched, setLaunched] = useState(false)
+
+  useEffect(() => {
+    if (value) {
+      setCharCount(value.length);
+      setError(max !== undefined && value.trim().length >= max);
+    } else {
+      setCharCount(0);
+    }
+  }, [value]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (!launched) {
+      setLaunched(true)
+    }
+
+    const newValue = e.target.value;
+    setCharCount(newValue.length);
+    
+    if (onChange) {
+      onChange(newValue);
+    }
+  };
 
   return (
-    <div className="flex flex-col w-full max-w-sm space-y-1">
+    <div className="flex flex-col w-full relative max-w-sm space-y-1">
       <label 
-        htmlFor="prueba" 
-        className="text-sm font-medium text-justify text-gray-700"
+        htmlFor={name}
+        className="text-sm mb-1 font-medium text-justify text-gray-700"
       >
         {label}
       </label>
 
       <textarea
-        id="prueba"
-        name="prueba"
+        id={name}
+        name={name}
         placeholder={placeholder}
-        maxLength={max}
-        className={`border p-2 h-35 outline-none rounded-xl text-sm ${error ? 'border-red-500' : 'border-gray-300'}`}
-        onChange={handleCharCount}
+        value={value}
+        onFocus={() => setShowRules(true)}
+        onBlur={() => setShowRules(false)}
+        className={`border py-2 px-3 h-32 m-0 outline-none rounded-xl resize-none text-sm ${error ? 'border-red-500' : 'border-gray-500'} overflow-y-auto scrollbar-hide`}
+        onChange={handleChange}
       />
 
-      <div className={`text-right text-sm text-gray-500 ${error ? 'text-red-500' : 'text-gray-500'}`}>
-        {charCount}/{max}
-      </div>
+      {max !== undefined && (
+        <div className={`text-right text-sm ${error ? 'text-red-500' : 'text-gray-500'}`}>
+          {charCount}/{max}
+        </div>
+      )}
+
+      {rules && rules.length > 0 && showRules && (<ValidationToolTip rules={rules} launched={launched}/>)}
     </div>
   )
 }
