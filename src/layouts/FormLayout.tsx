@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import Button from "../components/Button";
+import LoadingCircleSpinner from "../components/Loading";
 import DynamicForms from "../form/DynamicForms";
 import { FormSection } from "../interfaces/form.interfaces";
 
@@ -8,6 +11,8 @@ function FormLayout() {
   const [cuestionarios, setCuestionarios] = useState<FormSection[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleNext = () => {
     if (progress < cuestionarios.length) {
@@ -19,10 +24,8 @@ function FormLayout() {
   };
 
   const handlePrev = () => {
-    console.log("before", progress);
-      if (progress > 0) {
-        setProgress(progress - 1);
-          console.log("after", progress);
+    if (progress > 0) {
+      setProgress(progress - 1);
       setTitle(cuestionarios[progress - 2].titulo);
     }
   };
@@ -48,32 +51,39 @@ function FormLayout() {
   }, []);
 
   return (
-    <div className="flex justify-center gap-30">
+    <div className="flex justify-center gap-30 pb-40">
       <div className="w-lg text-left flex-column">
         <div className="items-center">
           <div className="bg-emerald-400 w-40 h-1 inline-block m-2 mb-0.5"></div>
           <h3 className="mb-5 inline-block">FORMS</h3>
         </div>
-        <h1 className="uppercase font-bold text-7xl font-righteous mb-5 text-pink-700">
+        <h1 className="uppercase font-bold text-7xl font-righteous mb-5 text-pink-600">
           {isCompleted ? "¡Completado!" : title}
         </h1>
-        <p>
+        <p className="my-5">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque error
           quis et molestiae impedit? Reiciendis, debitis aliquam ratione
           maiores, nam dolorum quasi nulla, temporibus quas nemo architecto
           deleniti saepe consequuntur.
         </p>
+        {isCompleted && (
+          <Button
+            enabled={true}
+            onClick={() => navigate("/results")}
+            text={"Ver respuestas"}
+          />
+        )}
       </div>
       <div className="flex gap-10 items-center">
         {isLoading ? (
-          <p>Cargando formularios...</p>
+          <LoadingCircleSpinner />
         ) : (
           <>
             <ul className="flex flex-col gap-5 text-lg">
               {cuestionarios.map((_, index) => (
                 <li
                   key={index}
-                  className={`w-14 flex justify-center text-emerald-950  items-center h-14 rounded-full
+                  className={`w-14 flex justify-center text-emerald-950  items-center h-14 rounded-full drop-shadow-xl shadow-purple-950
                                         ${
                                           index + 1 <= progress
                                             ? "bg-emerald-400"
@@ -112,9 +122,7 @@ function FormLayout() {
                 isFirstStep={progress === 1}
               />
             ) : (
-              <div>
-                <p>Respuestas</p>
-              </div>
+              <div>{/* IMAGE!! */}</div>
             )}
           </>
         )}

@@ -203,7 +203,7 @@ function DynamicForms({
             key={pregunta.id}
             name={pregunta.id}
             label={pregunta.pregunta}
-            placeholder="Select a option"
+            placeholder="Select an option"
             options={pregunta.opciones || []}
             value={formData[pregunta.id] as string}
             onChange={handleInputChange}
@@ -317,7 +317,7 @@ function DynamicForms({
   // ---------------------------------------------------------------------------------
 
   return (
-    <div className="flex flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50">
+    <div className="flex flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950">
       {currentForm.preguntas.map((pregunta) => (
         <div key={pregunta.id}>{renderFormField(pregunta)}</div>
       ))}
@@ -329,7 +329,6 @@ function DynamicForms({
         icon={<i className="fa-sharp fa-regular fa-arrow-left"></i>}
       />
       }
-        
         <Button
           enabled={isFormValid}
           onClick={onNext}

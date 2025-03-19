@@ -1,9 +1,10 @@
 import { ButtonProps } from "../interfaces/components.interfaces";
+import * as motion from "motion/react-client"
 
-function Button({ enabled, onClick, icon }: ButtonProps) {
+function Button({ enabled, onClick, icon, text }: ButtonProps) {
   return (
-    <div>
-      <button
+    <div >
+      <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}
         onClick={onClick}
         disabled={!enabled}
         className={`flex items-center cursor-pointer justify-center px-4 py-2 gap-2 rounded-lg transition-colors ${
@@ -13,7 +14,8 @@ function Button({ enabled, onClick, icon }: ButtonProps) {
         }`}
       >
         {icon}
-      </button>
+        {text}
+      </motion.button>
     </div>
   );
 }
