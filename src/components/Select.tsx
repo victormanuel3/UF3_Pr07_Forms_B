@@ -39,7 +39,7 @@ function Select(props: SelectProps) {
 
     return (
         <div className="relative" ref={selectRef} >
-            <label className="flex flex-col gap-2 items-start select-none">
+            <label className="flex flex-col gap-2 items-start select-none pointer-events-none">
                 <div className="flex flex-col text-left">
                     {label}
                     <span className="text-xs text-gray-600">Este campo es obligatorio*</span>
@@ -52,7 +52,7 @@ function Select(props: SelectProps) {
                         placeholder={placeholder}
                         readOnly
                         onClick={handleToogleDropdown}
-                        className="h-full w-full border border-gray-500 rounded-lg pl-3 outline-none cursor-pointer text-sm"
+                        className="h-full w-full pointer-events-auto border border-gray-500 rounded-lg pl-3 outline-none cursor-pointer text-sm"
                     />
                     <i className={`fa-sharp fa-regular fa-angle-down absolute top-1/2 right-3 -translate-y-1/2 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}></i>
                 </div>
