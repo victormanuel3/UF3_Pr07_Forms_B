@@ -26,4 +26,5 @@ export interface DynamicFormProps {
     currentFormIndex: number;
     onNext: () => void;
     onPrev: () => void;
+    isFirstStep: boolean;
 }

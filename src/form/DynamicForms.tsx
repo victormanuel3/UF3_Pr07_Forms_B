@@ -20,7 +20,8 @@ function DynamicForms({
   cuestionarios,
   currentFormIndex,
   onNext,
-  onPrev
+  onPrev,
+  isFirstStep
 }: DynamicFormProps) {
   const currentForm = cuestionarios[currentFormIndex];
   // ----------------------
@@ -321,11 +322,14 @@ function DynamicForms({
         <div key={pregunta.id}>{renderFormField(pregunta)}</div>
       ))}
       <div className="flex flex-row justify-end gap-5">
-        <Button
-          enabled={isFormValid}
-          onClick={onPrev}
-          icon={<i className="fa-sharp fa-regular fa-arrow-left"></i>}
-        />
+      {
+        !isFirstStep && <Button
+        enabled={true}
+        onClick={onPrev}
+        icon={<i className="fa-sharp fa-regular fa-arrow-left"></i>}
+      />
+      }
+        
         <Button
           enabled={isFormValid}
           onClick={onNext}

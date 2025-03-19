@@ -21,9 +21,9 @@ function FormLayout() {
   const handlePrev = () => {
     console.log("before", progress);
       if (progress > 0) {
-          setProgress(progress - 1);
+        setProgress(progress - 1);
           console.log("after", progress);
-      setTitle(cuestionarios[progress].titulo);
+      setTitle(cuestionarios[progress - 2].titulo);
     }
   };
 
@@ -109,6 +109,7 @@ function FormLayout() {
                 currentFormIndex={progress - 1}
                 onNext={handleNext}
                 onPrev={handlePrev}
+                isFirstStep={progress === 1}
               />
             ) : (
               <div>
