@@ -95,7 +95,7 @@
     "titulo": "Preferencias en Tecnología",
     "preguntas": [
       {
-        "id": "comentarios_tecnología",
+        "id": "comentarios_tecnologia",
         "tipo": "textarea",
         "pregunta": "¿Qué tecnología te gustaría aprender en el futuro?",
         "restricciones": {

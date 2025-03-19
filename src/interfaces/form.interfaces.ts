@@ -28,3 +28,7 @@ export interface DynamicFormProps {
     onPrev: () => void;
     isFirstStep: boolean;
 }
+
+export interface ResultProps {
+  cuestionarios: FormSection[];
+}

@@ -11,11 +11,13 @@ function App() {
     <div className="font-gabarito bg-purple-200 text-emerald-950">
         <Header />
 
+        <div className="min-h-screen">
         <Routes>
           <Route path="/home" element={<Landing />} />
           <Route path="/forms" element={<FormLayout />} />
           <Route path="/results" element={<Results />} />
         </Routes>
+        </div>
 
         <Footer />
     </div>

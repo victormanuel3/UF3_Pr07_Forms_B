@@ -1,4 +1,4 @@
-import React from "react";
+import { ResponsesDisplay } from "../components/ResponsesDisplay";
 
 const Results = () => {
   return (
@@ -19,7 +19,7 @@ const Results = () => {
         </p>
       </div>
       <div className="flex flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950">
-        
+        <ResponsesDisplay />
       </div>
     </div>
   );
