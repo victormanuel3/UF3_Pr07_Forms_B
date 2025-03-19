@@ -26,23 +26,41 @@ function DynamicForms({
   const currentForm = cuestionarios[currentFormIndex];
   // ----------------------
   type FormValue = string | string[] | number | number[];
-  const [formData, setFormData] = useState<Record<string, FormValue>>({});
+  const [formData, setFormData] = useState<Record<string, FormValue>>(() => {
+      const saveData = localStorage.getItem("formResponses")
+      if (saveData) {
+        return JSON.parse(saveData)
+      }
+      return {}
+  });
   // ----------------------
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     if (currentForm) {
-      const initialData: Record<string, string | string[]> = {};
-      currentForm.preguntas.forEach((pregunta) => {
-        if (pregunta.tipo === "check") {
-          initialData[pregunta.id] = [];
-        } else {
-          initialData[pregunta.id] = "";
+      const updatedData = {...formData}    
+      let dataUpdated = false
+      
+    currentForm.preguntas.forEach((pregunta) => {
+        if (updatedData[pregunta.id] === undefined) { 
+          if (pregunta.tipo === "check") {
+            updatedData[pregunta.id] = [];
+          } else {
+            updatedData[pregunta.id] = "";
+          }
+          dataUpdated = true;
         }
       });
-      setFormData(initialData);
+      if (dataUpdated) {
+        setFormData(updatedData);
+      }
     }
-  }, [currentForm]);
+  }, [currentForm, formData]);
+    
+  useEffect(() => {
+      localStorage.setItem('formResponses', JSON.stringify(formData));
+      console.log(localStorage.getItem('formResponses'))
+  }, [formData]);
 
   useEffect(() => {
     let valid = true;
@@ -317,7 +335,7 @@ function DynamicForms({
   // ---------------------------------------------------------------------------------
 
   return (
-    <div className="flex flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50">
+    <div className="flex shadow-[2px_2px_10px_rgba(0,0,0,0.15)] flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50">
       {currentForm.preguntas.map((pregunta) => (
         <div key={pregunta.id}>{renderFormField(pregunta)}</div>
       ))}

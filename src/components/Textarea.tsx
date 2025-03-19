@@ -9,6 +9,10 @@ function Textarea({ label, placeholder, max, rules, value, name, onChange }: Tex
   const [launched, setLaunched] = useState(false)
 
   useEffect(() => {
+    console.log(value)
+  }, [])
+
+  useEffect(() => {
     if (value) {
       setCharCount(value.length);
       setError(max !== undefined && value.trim().length >= max);
@@ -31,10 +35,10 @@ function Textarea({ label, placeholder, max, rules, value, name, onChange }: Tex
   };
 
   return (
-    <div className="flex flex-col w-full relative max-w-sm space-y-1">
+    <div className="flex flex-col w-full relative space-y-1">
       <label 
         htmlFor={name}
-        className="text-sm mb-1 font-medium text-justify text-gray-700"
+        className="text-sm mb-1 pointer-events-none font-medium text-justify text-gray-700"
       >
         {label}
       </label>
@@ -46,7 +50,7 @@ function Textarea({ label, placeholder, max, rules, value, name, onChange }: Tex
         value={value}
         onFocus={() => setShowRules(true)}
         onBlur={() => setShowRules(false)}
-        className={`border py-2 px-3 h-32 m-0 outline-none rounded-xl resize-none text-sm ${error ? 'border-red-500' : 'border-gray-500'} overflow-y-auto scrollbar-hide`}
+        className={`border py-2 px-3 h-32 m-0 w-full outline-none rounded-xl resize-none text-sm ${error ? 'border-red-500' : 'border-gray-500'} overflow-y-auto scrollbar-hide`}
         onChange={handleChange}
       />
 

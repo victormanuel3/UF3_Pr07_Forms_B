@@ -17,11 +17,11 @@ function Input(props: InputProps) {
 
     return (
         <div className="w-full">
-            <label className="flex flex-col gap-2 items-start select-none cursor-pointer">
+            <label className="flex flex-col gap-2 items-start pointer-events-none select-none cursor-pointer">
                 {label}
                 <div className="relative w-full">
                     <input
-                        className="h-10 w-full border border-gray-500 rounded-lg pl-3 text-sm"
+                        className="h-10 w-full border border-gray-500 pointer-events-auto rounded-lg pl-3 text-sm"
                         name={name}
                         type="text"
                         value={value}

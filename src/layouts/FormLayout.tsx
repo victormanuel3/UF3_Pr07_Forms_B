@@ -20,9 +20,9 @@ function FormLayout() {
 
   const handlePrev = () => {
     console.log("before", progress);
-      if (progress > 0) {
-        setProgress(progress - 1);
-          console.log("after", progress);
+    if (progress > 0) {
+      setProgress(progress - 1);
+      console.log("after", progress);
       setTitle(cuestionarios[progress - 2].titulo);
     }
   };
@@ -47,6 +47,32 @@ function FormLayout() {
     fetchCuestionarios();
   }, []);
 
+  const renderResponses = () => {
+      const saveData = localStorage.getItem('formResponses')
+      if (!saveData) return <p>No hay respuestas registradas</p>
+      
+      const formResponses = JSON.parse(saveData)
+
+      return (
+        <div className="flex flex-col items-center w-150">
+          <h2 className="text-4xl">Respuestas</h2>
+          {cuestionarios.map((cuestionario) => (
+            <div className="flex flex-col items-start w-full">
+              <h3 className="text-2xl">{cuestionario.titulo}</h3>
+              <div className="flex flex-col items-start">
+                {cuestionario.preguntas.map((pregunta) => (
+                  <>
+                    <span>{pregunta.pregunta}</span>
+                    <span>{formResponses[pregunta.id]}</span>
+                  </>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+  }
+    
   return (
     <div className="flex justify-center gap-30">
       <div className="w-lg text-left flex-column">
@@ -69,25 +95,25 @@ function FormLayout() {
           <p>Cargando formularios...</p>
         ) : (
           <>
-            <ul className="flex flex-col gap-5 text-lg">
+            <ul className="flex flex-col gap-5 text-lg font-gabarito">
               {cuestionarios.map((_, index) => (
                 <li
                   key={index}
-                  className={`w-14 flex justify-center text-emerald-950  items-center h-14 rounded-full
-                                        ${
-                                          index + 1 <= progress
-                                            ? "bg-emerald-400"
-                                            : "bg-stone-50"
-                                        }`}
+                  className={`w-14 flex justify-center shadow-[0px_1px_4px_rgba(0,0,0,0.25)] items-center h-14 rounded-full
+                  ${
+                    index + 1 <= progress
+                    ? "bg-emerald-400 text-emerald-950"
+                    : "bg-stone-50 text-black/40"
+                  }`}
                 >
                   {index + 1}
                 </li>
               ))}
               <li
-                className={`w-14 flex justify-center text-emerald-950 items-center h-14 rounded-full
-                                ${
-                                  isCompleted ? "bg-emerald-400" : "bg-gray-100"
-                                }`}
+                className={`w-14 flex justify-center items-center h-14 rounded-full
+                ${
+                  isCompleted ? "bg-emerald-400" : "bg-gray-100"
+                }`}
               >
                 <svg
                   width="21"
@@ -98,7 +124,7 @@ function FormLayout() {
                 >
                   <path
                     d="M20.0584 0.142906C18.3696 1.1173 16.461 2.51228 14.6663 4.08545C13.2199 5.35361 11.6773 6.88182 10.2486 8.46141C9.26295 9.55299 8.20026 10.8228 7.24031 12.0572C6.90641 12.4874 6.04278 13.64 5.77149 14.0205C5.63183 14.2163 5.55478 14.311 5.53873 14.3062C5.52588 14.303 4.30427 13.6159 2.82582 12.7812L0.136996 11.261L0.0759953 11.33C0.0438899 11.3686 0.00857399 11.4103 0.000547644 11.4247C-0.0138998 11.4504 0.214048 11.7169 6.02673 18.4574L6.49386 19H6.55807H6.62228L6.98668 18.2728C8.78618 14.6915 10.5536 11.7426 12.5586 8.9751C14.769 5.92669 17.2716 3.11907 20.0873 0.532986C20.2879 0.34838 20.4517 0.192669 20.4517 0.186248C20.4517 0.178222 20.3409 0.0209056 20.32 3.70978e-05C20.3168 -0.00156817 20.1996 0.0626426 20.0584 0.142906Z"
-                    fill="black"
+                    className={`${isCompleted ? "fill-emerald-950" : "fill-black/40"}`}
                   />
                 </svg>
               </li>
@@ -113,7 +139,7 @@ function FormLayout() {
               />
             ) : (
               <div>
-                <p>Respuestas</p>
+                {renderResponses()}
               </div>
             )}
           </>
