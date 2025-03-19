@@ -1,6 +1,6 @@
 [
   {
-    "titulo": "Cuestionario de Datos del Usuario",
+    "titulo": "Datos del Usuario",
     "preguntas": [
       {
         "id": "nombre",
@@ -56,7 +56,7 @@
     ]
   },
   {
-    "titulo": "Cuestionario de Evaluación Académica",
+    "titulo": "Evaluación Académica",
     "preguntas": [
       {
         "id": "comentarios",
@@ -101,7 +101,7 @@
     ]
   },
   {
-    "titulo": "Encuesta de Preferencias en Tecnología",
+    "titulo": "Preferencias en Tecnología",
     "preguntas": [
       {
         "id": "comentarios",
@@ -140,7 +140,7 @@
     ]
   },
   {
-    "titulo": "Encuesta de Preferencias de Cine",
+    "titulo": "Preferencias de Cine",
     "preguntas": [
       {
         "id": "comentarios",

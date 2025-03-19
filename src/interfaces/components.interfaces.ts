@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactNode } from "react"
 
 export interface InputProps {
     label: string,
@@ -45,4 +45,5 @@ export interface ToolTipProps {
 export interface ButtonProps {
     enabled: boolean
     onClick: () => void
+    icon: ReactNode
 }

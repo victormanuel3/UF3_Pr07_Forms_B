@@ -25,4 +25,5 @@ export interface DynamicFormProps {
     cuestionarios: FormSection[];
     currentFormIndex: number;
     onNext: () => void;
+    onPrev: () => void;
 }

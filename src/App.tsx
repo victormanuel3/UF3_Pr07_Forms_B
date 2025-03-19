@@ -1,11 +1,16 @@
-import './App.css';
-import WebLayout from './layouts/WebLayout';
-import Landing from './pages/Landing';
+import "./App.css";
+import Footer from "./layouts/Footer.tsx";
+import FormLayout from "./layouts/FormLayout.tsx";
+import Header from "./layouts/Header.tsx";
 
 function App() {
   return (
-    <Landing />
-  )
+    <div className="font-gabarito bg-purple-200 text-emerald-950">
+      <Header />
+      <FormLayout />
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;
