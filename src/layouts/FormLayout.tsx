@@ -25,6 +25,7 @@ function FormLayout() {
   const [isLoading, setIsLoading] = useState(true); // Controla el estado de carga.
   const [isCompleted, setIsCompleted] = useState(false); // Indica si se han completado todos los cuestionarios.
   const { t } = useTranslation(); // Función para traducir textos.
+  const [shouldResetForm, setShouldResetForm] = useState(false); //Estado que indica si el formulario debe reiniciarse.
 
   /**
    * Esta función maneja la navegación al siguiente cuestionario.
@@ -60,6 +61,31 @@ function FormLayout() {
       console.log("after", progress);
       setTitle(cuestionarios[progress - 2].titulo);
     }
+  };
+    
+  /**
+   * Restablece el estado del formulario y reinicia el progreso.
+   * 
+   * - Borra las respuestas guardadas en `localStorage`.
+   * - Reinicia el progreso al primer cuestionario.
+   * - Restablece el título al primer cuestionario si hay datos.
+   * - Activa `shouldResetForm` para indicarle a `DynamicForms` que debe limpiar los datos.
+   */
+  const handleReset = () => {
+    localStorage.removeItem("formResponses")
+    setProgress(1)  
+    if (isCompleted) setIsCompleted(false)
+    if (cuestionarios.length > 0) setTitle(t(cuestionarios[0].titulo))
+    setShouldResetForm(true); // Activar el flag para resetear el formulario
+  }
+  
+  /**
+   * Desactiva `shouldResetForm` tras completar el reinicio del formulario.
+   * 
+   * - Se ejecuta cuando `DynamicForms` ha limpiado los datos y ha confirmado el reset.
+   */
+  const handleResetComplete = () => {
+    setShouldResetForm(false);
   };
 
   useEffect(() => {
@@ -158,6 +184,11 @@ function FormLayout() {
           maiores, nam dolorum quasi nulla, temporibus quas nemo architecto
           deleniti saepe consequuntur.
         </p>
+        <div className="mt-6">
+            <button className="bg-stone-50 py-2.5 px-6 mr-2 border rounded-full" onClick={handleReset} >
+                RESET
+            </button>
+        </div>      
       </div>
       <div className="flex gap-10 items-center">
         {/* Muestra un mensaje de carga mientras se obtienen los datos de los cuestionarios */}
@@ -215,6 +246,8 @@ function FormLayout() {
                 onNext={handleNext}
                 onPrev={handlePrev}
                 isFirstStep={progress === 1}
+                shouldReset={shouldResetForm}
+                onResetComplete={handleResetComplete}
               />
             ) : (
               <div>{renderResponses()}</div>
