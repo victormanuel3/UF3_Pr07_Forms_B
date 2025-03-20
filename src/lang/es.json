@@ -1,0 +1,85 @@
+{
+  "form1": {
+    "formTitle": "Cuestionario de Datos del Usuario",
+    "inputTitle": {
+      "question1": "¿Cuál es tu nombre?",
+      "question2": "¿Cuál es tu fecha de nacimiento?",
+      "question3": "¿Cuál es tu correo electrónico?",
+      "question4": "¿Cuál es tu genero?",
+      "question5": "¿Qué prefieres hacer en tu tiempo libre?"
+    },
+    "inputContent": {
+      "question4": {
+        "opt1": "Masculino",
+        "opt2": "Femenino",
+        "opt3": "Otro"
+      },
+      "question5": {
+        "opt1": "Leer",
+        "opt2": "Deportes",
+        "opt3": "Viajar",
+        "opt4": "Cine"
+      }
+    }
+  },
+  "form2": {
+    "formTitle": "Cuestionario de Evaluación Académica",
+    "inputTitle": {
+      "question1": "¿Qué mejorarías en el curso?",
+      "question2": "¿Qué tan satisfecho estás con el contenido del curso?",
+      "question3": "¿Asististe a todas las clases?",
+      "question4": "¿Cuáles horarios prefieres para las clases? (Selecciona hasta 2 opciones)"
+    },
+    "inputContent": {
+      "question1": "El contenido del curso está bien, pero sería útil más ejemplos prácticos.",
+      "question3": {
+        "yes": "sí",
+        "no": "no"
+      },
+      "question4": {
+        "opt1": "Lunes 9:00 AM - 11:00 AM",
+        "opt2": "Martes 3:00 PM - 5:00 PM",
+        "opt3": "Miércoles 10:00 AM - 12:00 PM",
+        "opt4": "Jueves 1:00 PM - 3:00 PM",
+        "opt5": "Viernes 4:00 AM - 6:00 PM"
+      }
+    }
+  },
+  "form3": {
+    "form1Title": "Encuesta de Preferencias en Tecnología",
+    "inputTitle": {
+      "question1": "¿Qué tecnología te gustaría aprender en el futuro?",
+      "question2": "¿Qué sistema operativo prefieres usar?",
+      "question3": "¿Qué dispositivos usas regularmente? (Selecciona hasta 2 opciones)",
+      "question4": "¿Cuántas horas a la semana dedicas a aprender sobre tecnología?"
+    },
+    "inputContent": {
+      "question3": {
+        "opt1": "smartphone",
+        "opt2": "portátil",
+        "opt3": "tablet",
+        "opt4": "smartwatch"
+      }
+    }
+  },
+  "form4": {
+    "formTitle": "Encuesta de Preferencias de Cine",
+    "inputTitle": {
+      "question1": "¿Qué género de películas prefieres?",
+      "question2": "¿Cuál es tu película favorita?",
+      "question3": "¿Has visto alguna de las siguientes películas?",
+      "question4": "¿Con qué frecuencia ves películas?"
+    },
+    "inputContent": {
+      "question2": {
+        "opt1": "Origen",
+        "opt2": "Matrix",
+        "opt3": "Vengadores",
+        "opt4": "Titanic"
+      },
+      "question3": {
+        "text": "Opción 1-5 veces al mes"
+      }
+    }
+  }
+}

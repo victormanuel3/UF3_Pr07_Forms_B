@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Button from "../components/Button";
 import Checkbox from "../components/Checkbox";
 import Input from "../components/Input";
@@ -21,28 +22,29 @@ function DynamicForms({
   currentFormIndex,
   onNext,
   onPrev,
-  isFirstStep
+  isFirstStep,
 }: DynamicFormProps) {
+  const { t } = useTranslation();
   const currentForm = cuestionarios[currentFormIndex];
   // ----------------------
   type FormValue = string | string[] | number | number[];
   const [formData, setFormData] = useState<Record<string, FormValue>>(() => {
-      const saveData = localStorage.getItem("formResponses")
-      if (saveData) {
-        return JSON.parse(saveData)
-      }
-      return {}
+    const saveData = localStorage.getItem("formResponses");
+    if (saveData) {
+      return JSON.parse(saveData);
+    }
+    return {};
   });
   // ----------------------
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     if (currentForm) {
-      const updatedData = {...formData}    
-      let dataUpdated = false
-      
-    currentForm.preguntas.forEach((pregunta) => {
-        if (updatedData[pregunta.id] === undefined) { 
+      const updatedData = { ...formData };
+      let dataUpdated = false;
+
+      currentForm.preguntas.forEach((pregunta) => {
+        if (updatedData[pregunta.id] === undefined) {
           if (pregunta.tipo === "check") {
             updatedData[pregunta.id] = [];
           } else {
@@ -56,10 +58,10 @@ function DynamicForms({
       }
     }
   }, [currentForm, formData]);
-    
+
   useEffect(() => {
-      localStorage.setItem('formResponses', JSON.stringify(formData));
-      console.log(localStorage.getItem('formResponses'))
+    localStorage.setItem("formResponses", JSON.stringify(formData));
+    console.log(localStorage.getItem("formResponses"));
   }, [formData]);
 
   useEffect(() => {
@@ -205,7 +207,7 @@ function DynamicForms({
             key={pregunta.id}
             onChange={handleInputChange}
             rules={getValidationRules(pregunta)}
-            label={pregunta.pregunta}
+            label={t(pregunta.pregunta)}
             name={pregunta.id}
             placeholder={
               pregunta.id === "fecha_nacimiento" || pregunta.id === "fecha"
@@ -220,10 +222,10 @@ function DynamicForms({
           <Select
             key={pregunta.id}
             name={pregunta.id}
-            label={pregunta.pregunta}
+            label={t(pregunta.pregunta)}
             placeholder="Select a option"
-            options={pregunta.opciones || []}
-            value={formData[pregunta.id] as string}
+            options={pregunta.opciones?.map((opcion) => t(opcion)) || []}
+            value={t(formData[pregunta.id] as string)}
             onChange={handleInputChange}
             rules={[{ message: "Este campo es obligatorio*" }]}
           />
@@ -232,8 +234,8 @@ function DynamicForms({
         return (
           <Checkbox
             key={pregunta.id}
-            label={pregunta.pregunta}
-            options={pregunta.opciones || []}
+            label={t(pregunta.pregunta)}
+            options={pregunta.opciones?.map((opcion) => t(opcion)) || []}
             onSelectOption={(option) =>
               handleCheckboxChange(pregunta.id, option)
             }
@@ -258,7 +260,7 @@ function DynamicForms({
         return (
           <Textarea
             key={pregunta.id}
-            label={pregunta.pregunta}
+            label={t(pregunta.pregunta)}
             placeholder="Escribe un texto"
             max={pregunta.restricciones?.max}
             name={pregunta.id}
@@ -340,14 +342,14 @@ function DynamicForms({
         <div key={pregunta.id}>{renderFormField(pregunta)}</div>
       ))}
       <div className="flex flex-row justify-end gap-5">
-      {
-        !isFirstStep && <Button
-        enabled={true}
-        onClick={onPrev}
-        icon={<i className="fa-sharp fa-regular fa-arrow-left"></i>}
-      />
-      }
-        
+        {!isFirstStep && (
+          <Button
+            enabled={true}
+            onClick={onPrev}
+            icon={<i className="fa-sharp fa-regular fa-arrow-left"></i>}
+          />
+        )}
+
         <Button
           enabled={isFormValid}
           onClick={onNext}

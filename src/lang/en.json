@@ -1,0 +1,85 @@
+{
+  "form1": {
+    "formTitle": "User Data Questionnaire",
+    "inputTitle": {
+      "question1": "What is your name?",
+      "question2": "What is your birthdate?",
+      "question3": "Which is your mail?",
+      "question4": "What is your gender?",
+      "question5": "What do you prefer doing on your free time?"
+    },
+    "inputContent": {
+      "question4": {
+        "opt1": "Masculine",
+        "opt2": "Femenine",
+        "opt3": "Others"
+      },
+      "question5": {
+        "opt1": "Reading",
+        "opt2": "Sports",
+        "opt3": "Travelling",
+        "opt4": "Going to the movies"
+      }
+    }
+  },
+  "form2": {
+    "formTitle": "Academic Data Questionnaire",
+    "inputTitle": {
+      "question1": "Is there anything you would have done differently this school year?",
+      "question2": "How would you rate your satisfaction with the course content?",
+      "question3": "Did you attend all the classes?",
+      "question4": "Which class schedules do you prefer? (Select up to 2 options)"
+    },
+    "inputContent": {
+      "question1": "The content of the course classes was okay, but it would have been more useful with more worked examples",
+      "question3": {
+        "yes": "yes",
+        "no": "no"
+      },
+      "question4": {
+        "opt1": "Monday 9:00 AM - 11:00 AM",
+        "opt2": "Tuesday 3:00 PM - 5:00 PM",
+        "opt3": "Wednesday 10:00 AM - 12:00 PM",
+        "opt4": "Thursday 1:00 PM - 3:00 PM",
+        "opt5": "Friday 4:00 AM - 6:00 PM"
+      }
+    }
+  },
+  "form3": {
+    "form1Title": "Technology Preferences Survey",
+    "inputTitle": {
+      "question1": "What technology would you like to learn in the future?",
+      "question2": "Which operating system do you prefer to use?",
+      "question3": "What devices do you use regularly? (Select up to 2 options)",
+      "question4": "How many hours per week do you dedicate to learning about technology?"
+    },
+    "inputContent": {
+      "question3": {
+        "opt1": "smartphone",
+        "opt2": "laptop",
+        "opt3": "tablet",
+        "opt4": "smartwatch"
+      }
+    }
+  },
+  "form4": {
+    "formTitle": "Cinema Preferences Survey",
+    "inputTitle": {
+      "question1": "What genre of movies do you prefer?",
+      "question2": "What is your favourite movie?",
+      "question3": "Have you seen any of the following movies?",
+      "question4": "How often do you whatch movies?"
+    },
+    "inputContent": {
+      "question2": {
+        "opt1": "Inception",
+        "opt2": "The Matrix",
+        "opt3": "Avengers",
+        "opt4": "Titanic"
+      },
+      "question3": {
+        "text": "Option 1-5 times per month"
+      }
+    }
+  }
+}
