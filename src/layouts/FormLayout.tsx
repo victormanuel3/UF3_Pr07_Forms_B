@@ -1,17 +1,40 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import cuestionariosJson from "../../public/data/cuestionarios.json";
 import DynamicForms from "../form/DynamicForms";
 import { FormSection } from "../interfaces/form.interfaces";
 
+/**
+ * Componente principal que gestiona la navegación entre los distintos cuestionarios.
+ * 
+ * - Controla el estado de progreso de los formularios.
+ * - Maneja la carga y visualización dínamica de los cuestionarios.
+ * - Permite avanzar y retroceder entre formularios.
+ * - Muestra las respuestas cuando se han completado todos los cuestionarios.
+ * 
+ * @returns {React.ReactElement} 
+ * - Título dinámico que muestra el título del cuestionario actual o "¡Completado!"
+ * - Indicadores de progreso (círculos numerados)
+ * - Formulario dinámico del cuestionario actual o resumen de respuestas al finalizar
+ * **/
 function FormLayout() {
-  const [title, setTitle] = useState("");
-  const [progress, setProgress] = useState(1);
-  const [cuestionarios, setCuestionarios] = useState<FormSection[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isCompleted, setIsCompleted] = useState(false);
-  const { t } = useTranslation();
 
+  const [title, setTitle] = useState(""); // Título del cuestionario actual, 
+  const [progress, setProgress] = useState(1); // índice del cuestionario actual.
+  const [cuestionarios, setCuestionarios] = useState<FormSection[]>([]); // Listado de los cuestionarios.
+  const [isLoading, setIsLoading] = useState(true); // Controla el estado de carga.
+  const [isCompleted, setIsCompleted] = useState(false); // Indica si se han completado todos los cuestionarios.
+  const { t } = useTranslation(); // Función para traducir textos.
+
+  /**
+   * Esta función maneja la navegación al siguiente cuestionario.
+   * 
+   * - Incrementa el progreso actual en 1.
+   * - Actualiza el título con el del siguiente formulario, aplicando la traducción
+   * - Si se ha llegado al cuestionario final, marca el proceso como completado.
+   * 
+   * @returns {void} no retorna ningún valor, solo actualiza los estados.
+   * **/
   const handleNext = () => {
     if (progress < cuestionarios.length) {
       setProgress(progress + 1);
@@ -21,9 +44,18 @@ function FormLayout() {
     }
   };
 
+  /**
+   * Esta función maneja la navegación al cuestionario anterior.
+   * 
+   * - Verifica que el progreso actual sea mayor a 0.
+   * - Decrementa el progreso actual en 1.
+   * - Actualiza el título con el del cuestionario anterior.
+   * 
+   * @returns {void} No retorna ningún valor, solo actualiza los estados.
+   * **/
   const handlePrev = () => {
     console.log("before", progress);
-    if (progress > 0) {
+    if (progress > 1) {
       setProgress(progress - 1);
       console.log("after", progress);
       setTitle(cuestionarios[progress - 2].titulo);
@@ -31,6 +63,19 @@ function FormLayout() {
   };
 
   useEffect(() => {
+    /**
+     * Obtiene los cuestionarios desde el servidor mediante una petición HTTP.
+     * 
+     * - Realiza una solicitud para cargar los cuestionarios en formato JSON.
+     * - Maneja el estado de carga (`setIsLoading`).
+     * - Guarda los cuestionarios en el estado (`setCuestionarios`).
+     * - Si hay cuestionarios disponibles, establece el título del primero (`setTitle`).
+     * - Captura errores y los muestra en consola.
+     * 
+     * @async
+     * @returns {Promise<void>} No retorna ningún valor, solo actualiza los estados.
+     * @throws {Error} Si la respuesta del servidor no es satisfactoria.
+     **/
     const fetchCuestionarios = async () => {
       try {
         const response = await fetch("/data/cuestionarios.json");
@@ -50,6 +95,16 @@ function FormLayout() {
     fetchCuestionarios();
   }, [t]);
 
+  /**
+   * 
+   * Esta función renderiza las respuestas guardadas en el localStorage
+   * 
+   * - Verifica si existen datos guardados en el localStorage bajo la clave "formResponses".
+   * - Si no hay datos, muestra un mensaje indicando que no hay respuestas registradas.
+   * - Si hay datos, convierte el string json a un objeto y muestra las respuestas.
+   * 
+   * @returns {React.ReactElement} Retorna un elemento con las respuestas en caso que hayan.
+   * **/
   const renderResponses = () => {
     const saveData = localStorage.getItem("formResponses");
     if (!saveData) return <p>No hay respuestas registradas</p>;
@@ -63,11 +118,15 @@ function FormLayout() {
           <div className="flex flex-col items-start w-full">
             <h3 className="text-2xl">{t(cuestionario.titulo)}</h3>
             <div className="flex flex-col items-start">
+                
+              {/* Recorremos cada una de las preguntas por cuestionario */}
               {cuestionario.preguntas.map((pregunta) => {
                 console.log(pregunta);
                 return (
                   <>
+                    {/* Mostramos la pregunta con su correspondiente traducción */}    
                     <span>{t(pregunta.pregunta)}</span>
+                    {/* Mostramos la respuesta correspondiente usando el ID de la pregunta como clave */}
                     <span>{formResponses[pregunta.id]}</span>
                   </>
                 );
@@ -80,13 +139,17 @@ function FormLayout() {
   };
 
   return (
-    <div className="flex justify-center gap-30">
-      <div className="w-lg text-left flex-column">
+    <div className="flex justify-center gap-20">
+      <div className="w-[29rem] text-left flex-column">
         <div className="items-center">
           <div className="bg-emerald-400 w-40 h-1 inline-block m-2 mb-0.5"></div>
           <h3 className="mb-5 inline-block">FORMS</h3>
         </div>
-        <h1 className="uppercase font-bold text-7xl font-righteous mb-5 text-pink-700">
+        {/* Título principal que cambia dinámicamente:
+          - Muestra "¡Completado!" cuando se han respondido todos los cuestionarios (isCompleted = true)
+          - Título del cuestionario actual.
+        */}
+        <h1 className="uppercase font-bold text-6xl font-righteous mb-5 text-pink-700">
           {isCompleted ? "¡Completado!" : title}
         </h1>
         <p>
@@ -97,16 +160,20 @@ function FormLayout() {
         </p>
       </div>
       <div className="flex gap-10 items-center">
+        {/* Muestra un mensaje de carga mientras se obtienen los datos de los cuestionarios */}
         {isLoading ? (
-          <p>Cargando formularios...</p>
+          <p>Loading Forms...</p>
         ) : (
           <>
             <ul className="flex flex-col gap-5 text-lg font-gabarito">
+              {/* Renderiza los indicadores de progreso numerados para cada cuestionario */}
               {cuestionarios.map((_, index) => (
                 <li
                   key={index}
                   className={`w-14 flex justify-center shadow-[0px_1px_4px_rgba(0,0,0,0.25)] items-center h-14 rounded-full
                   ${
+                    /* Aplica estilo de completado (verde) a los cuestionarios ya visitados,
+                       y estilo inactivo (gris) a los pendientes */
                     index + 1 <= progress
                       ? "bg-emerald-400 text-emerald-950"
                       : "bg-stone-50 text-black/40"
@@ -116,7 +183,7 @@ function FormLayout() {
                 </li>
               ))}
               <li
-                className={`w-14 flex justify-center items-center h-14 rounded-full
+                className={`w-14 flex justify-center items-center h-14 rounded-full    
                 ${isCompleted ? "bg-emerald-400" : "bg-gray-100"}`}
               >
                 <svg
@@ -135,6 +202,12 @@ function FormLayout() {
                 </svg>
               </li>
             </ul>
+            {/**
+              * Verificamos si todos los formularios han sido respondidos.
+              * 
+              * - Si `isCompleted` es true, se muestran las respuestas registradas.
+              * - Si aún hay formularios pendientes, se muestra el formulario actual.
+              **/}
             {!isCompleted ? (
               <DynamicForms
                 cuestionarios={cuestionarios}
