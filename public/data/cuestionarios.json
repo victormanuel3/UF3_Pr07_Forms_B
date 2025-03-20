@@ -198,12 +198,7 @@
         "tipo": "select",
         "pregunta": "form4.inputTitle.question4",
         "respuesta": "4",
-        "opciones": [
-          {
-            "grupo": "form4.inputContent.question3.text",
-            "valores": ["1", "2", "3", "4", "5"]
-          }
-        ]
+        "opciones": ["1", "2", "3", "4", "5"]
       }
     ]
   }
