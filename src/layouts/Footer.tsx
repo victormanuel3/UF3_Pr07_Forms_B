@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
@@ -35,7 +38,7 @@ const Footer = () => {
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
                 <h2 className="mb-6 text-2xs font-semibold uppercase text-white font-righteous tracking-wider">
-                  Resources
+                  {t("footer.resources")}
                 </h2>
                 <ul className="font-medium text-white">
                   <li className="mb-4">
@@ -51,23 +54,29 @@ const Footer = () => {
                       href="#"
                       className="hover:underline hover:text-emerald-400"
                     >
-                      Start Forms
+                      Forms
                     </a>
                   </li>
                 </ul>
               </div>
               <div>
                 <h2 className="mb-6 text-2xs font-semibold uppercase text-white font-righteous tracking-wider">
-                  Follow us
+                  {t("footer.contact")}
                 </h2>
                 <ul className="font-medium text-white">
                   <li className="mb-4">
-                    <a href="#" className="hover:underline hover:text-emerald-400">
+                    <a
+                      href="#"
+                      className="hover:underline hover:text-emerald-400"
+                    >
                       Github
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline hover:text-emerald-400">
+                    <a
+                      href="#"
+                      className="hover:underline hover:text-emerald-400"
+                    >
                       Discord
                     </a>
                   </li>
@@ -79,12 +88,18 @@ const Footer = () => {
                 </h2>
                 <ul className="font-medium text-white">
                   <li className="mb-4">
-                    <a href="#" className="hover:underline hover:text-emerald-400">
+                    <a
+                      href="#"
+                      className="hover:underline hover:text-emerald-400"
+                    >
                       Privacy Policy
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline hover:text-emerald-400">
+                    <a
+                      href="#"
+                      className="hover:underline hover:text-emerald-400"
+                    >
                       Terms &amp; Conditions
                     </a>
                   </li>

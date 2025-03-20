@@ -1,12 +1,13 @@
 {
   "form1": {
     "formTitle": "User Data Questionnaire",
+    "description": "This form collects general information such as name, date of birth and personal preferences. It is a basic record to organize and contextualize each participant's data.",
     "inputTitle": {
-      "question1": "What is your name?",
-      "question2": "What is your birthdate?",
-      "question3": "Which is your mail?",
-      "question4": "What is your gender?",
-      "question5": "What do you prefer doing on your free time?"
+      "question1": "What is your name? *",
+      "question2": "What is your birthdate? *",
+      "question3": "Which is your mail? *",
+      "question4": "What is your gender? *",
+      "question5": "What do you prefer doing on your free time? *"
     },
     "inputContent": {
       "question4": {
@@ -24,11 +25,12 @@
   },
   "form2": {
     "formTitle": "Academic Data Questionnaire",
+    "description": "This questionnaire allows you to evaluate different aspects of the course, from the content to the methodology used. It also includes a space for comments on possible improvements.",
     "inputTitle": {
-      "question1": "Is there anything you would have done differently this school year?",
-      "question2": "How would you rate your satisfaction with the course content?",
-      "question3": "Did you attend all the classes?",
-      "question4": "Which class schedules do you prefer? (Select up to 2 options)"
+      "question1": "Is there anything you would have done differently this school year? *",
+      "question2": "How would you rate your satisfaction with the course content? *",
+      "question3": "Did you attend all the classes? (Select 1 option) *",
+      "question4": "Which class schedules do you prefer? (Select up to 2 options) *"
     },
     "inputContent": {
       "question1": "The content of the course classes was okay, but it would have been more useful with more worked examples",
@@ -46,12 +48,13 @@
     }
   },
   "form3": {
-    "form1Title": "Technology Preferences Survey",
+    "formTitle": "Technology Preferences Survey",
+    "description": "A short questionnaire to find out what systems, devices and technological tools you use most frequently, as well as the topics you would like to learn about in the future.",
     "inputTitle": {
-      "question1": "What technology would you like to learn in the future?",
-      "question2": "Which operating system do you prefer to use?",
-      "question3": "What devices do you use regularly? (Select up to 2 options)",
-      "question4": "How many hours per week do you dedicate to learning about technology?"
+      "question1": "What technology would you like to learn in the future? *",
+      "question2": "Which operating system do you prefer to use? *",
+      "question3": "What devices do you use regularly? (Select up to 2 options) *",
+      "question4": "How many hours per week do you dedicate to learning about technology? *"
     },
     "inputContent": {
       "question3": {
@@ -64,11 +67,12 @@
   },
   "form4": {
     "formTitle": "Cinema Preferences Survey",
+    "description": "Here we collect data on the genres of movies you enjoy the most, the ones you have seen and how often you usually watch movies.",
     "inputTitle": {
-      "question1": "What genre of movies do you prefer?",
-      "question2": "What is your favourite movie?",
-      "question3": "Have you seen any of the following movies?",
-      "question4": "How often do you whatch movies?"
+      "question1": "What genre of movies do you prefer? *",
+      "question2": "What is your favourite movie? *",
+      "question3": "Have you seen any of the following movies? *",
+      "question4": "How often do you whatch movies? *"
     },
     "inputContent": {
       "question2": {
@@ -81,5 +85,32 @@
         "text": "Option 1-5 times per month"
       }
     }
+  },
+  "formComplete": {
+    "complete": "Completed!",
+    "description": "",
+    "answers": "Your answers"
+  },
+  "placeholder": {
+    "text": "Write a text",
+    "select": "Select an option"
+  },
+  "messages": {
+    "required": "This field is required.",
+    "maxSelect": "There should be at most {{max}} options selected.",
+    "betweenTextLength": "The field should have between {{min}} and {{max}} characters.",
+    "minTextLength": "El campo debe tener mínimo {{min}} caracteres.",
+    "emailFormat": "You should add a correct email.",
+    "domainEmail": "The domain of the email should be {{domain}}.",
+    "dateFormat": "You should add a valid date separated by \"/\".",
+    "minAge": "You should be at least {{age}} years old."
+  },
+  "buttons": {
+    "start": "Start!",
+    "results": "See answers"
+  },
+  "footer": {
+    "resources": "Resources",
+    "contact": "Follow us"
   }
 }

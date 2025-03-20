@@ -1,15 +1,15 @@
+import { motion as m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import cuestionariosJson from "../../public/data/cuestionarios.json";
 import { useNavigate } from "react-router";
 import Button from "../components/Button";
 import LoadingCircleSpinner from "../components/Loading";
 import DynamicForms from "../form/DynamicForms";
 import { FormSection } from "../interfaces/form.interfaces";
-import { motion as m } from "framer-motion";
 
 function FormLayout() {
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [progress, setProgress] = useState(1);
   const [cuestionarios, setCuestionarios] = useState<FormSection[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +22,7 @@ function FormLayout() {
     if (progress < cuestionarios.length) {
       setProgress(progress + 1);
       setTitle(t(cuestionarios[progress].titulo));
+      setDescription(t(cuestionarios[progress].descripcion));
     } else {
       setIsCompleted(true);
     }
@@ -30,7 +31,9 @@ function FormLayout() {
   const handlePrev = () => {
     if (progress > 0) {
       setProgress(progress - 1);
-      setTitle(cuestionarios[progress - 2].titulo);
+      setTitle(t(cuestionarios[progress - 2].titulo));
+      setDescription(t(cuestionarios[progress - 2].descripcion));
+      console.log(cuestionarios[progress - 2].descripcion);
     }
   };
 
@@ -38,7 +41,7 @@ function FormLayout() {
     const fetchCuestionarios = async () => {
       try {
         const response = await fetch("/data/cuestionarios.json");
-        if (!response.ok) throw new Error("Error al cargar los datos");
+        if (!response.ok) throw new Error("Error at loading data");
         const data = await response.json();
         setCuestionarios(data);
         localStorage.setItem("preguntas-cuestionario", JSON.stringify(data));
@@ -54,7 +57,7 @@ function FormLayout() {
 
     fetchCuestionarios();
   }, [t]);
-    
+
   return (
     <m.div
       initial={{ opacity: 0 }}
@@ -69,19 +72,14 @@ function FormLayout() {
           <h3 className="mb-5 inline-block">FORMS</h3>
         </div>
         <h1 className="uppercase font-bold text-7xl font-righteous mb-5 text-pink-600">
-          {isCompleted ? "¡Completado!" : title}
+          {isCompleted ? t("formComplete.complete") : title}
         </h1>
-        <p className="my-5">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque error
-          quis et molestiae impedit? Reiciendis, debitis aliquam ratione
-          maiores, nam dolorum quasi nulla, temporibus quas nemo architecto
-          deleniti saepe consequuntur.
-        </p>
+        <p className="my-5">{description}</p>
         {isCompleted && (
           <Button
             enabled={true}
             onClick={() => navigate("/results")}
-            text={"Ver respuestas"}
+            text={t("buttons.results")}
           />
         )}
       </div>

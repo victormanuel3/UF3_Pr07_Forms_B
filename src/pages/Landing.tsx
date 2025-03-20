@@ -1,10 +1,13 @@
+import { motion as m } from "framer-motion";
 import { useNavigate } from "react-router";
 import Button from "../components/Button";
 import PathDrawing from "../components/PathDrawing";
-import { motion as m } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 function Landing() {
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   return (
     <m.div
@@ -31,7 +34,7 @@ function Landing() {
         <Button
           enabled={true}
           onClick={() => navigate("/forms")}
-          text={"Empezar"}
+          text={t("buttons.start")}
         />
       </div>
       <div className="mb-40">

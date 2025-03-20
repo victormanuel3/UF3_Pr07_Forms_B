@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FormSection } from "../interfaces/form.interfaces";
 
-export const ResponsesDisplay = () => {  
+export const ResponsesDisplay = () => {
+  const { t } = useTranslation();
+
   const saveData = localStorage.getItem("formResponses");
   if (!saveData) return <p>No hay respuestas registradas</p>;
 
@@ -20,11 +22,13 @@ export const ResponsesDisplay = () => {
         (cuestionario) => (
           <div className="shadow-md">
             <div className="flex flex-col items-start w-full">
-              <h3 className="text-4xl font-righteous text-emerald-500">{cuestionario.titulo}</h3>
+              <h3 className="text-4xl font-righteous text-emerald-500">
+                {t(cuestionario.titulo)}
+              </h3>
               <div className="mt-10 flex flex-col items-start gap-2">
                 {cuestionario.preguntas.map((pregunta) => (
                   <>
-                    <span className="font-bold color">{pregunta.pregunta}</span>
+                    <span className="font-bold color">{t(pregunta.pregunta)}</span>
                     <span className="mb-5">{formResponses[pregunta.id]}</span>
                   </>
                 ))}

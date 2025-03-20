@@ -19,6 +19,7 @@ export interface FormQuestion {
 export interface FormSection {
     titulo: string;
     preguntas: FormQuestion[];
+    descripcion: string;
 }
 
 export interface DynamicFormProps {

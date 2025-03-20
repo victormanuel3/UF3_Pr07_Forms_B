@@ -1,3 +1,4 @@
+import { motion as m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../components/Button";
@@ -16,7 +17,6 @@ import {
   validateRequiredArray,
   validateRequiredField,
 } from "../utils/validation";
-import { motion as m } from "framer-motion";
 
 function DynamicForms({
   cuestionarios,
@@ -213,7 +213,7 @@ function DynamicForms({
             placeholder={
               pregunta.id === "fecha_nacimiento" || pregunta.id === "fecha"
                 ? "mm/dd/yyyy"
-                : "Escribe un texto"
+                : t("placeholder.text")
             }
             value={formData[pregunta.id] as string}
           />
@@ -224,11 +224,11 @@ function DynamicForms({
             key={pregunta.id}
             name={pregunta.id}
             label={t(pregunta.pregunta)}
-            placeholder="Select an option"
+            placeholder={t("placeholder.select")}
             options={pregunta.opciones?.map((opcion) => t(opcion)) || []}
             value={t(formData[pregunta.id] as string)}
             onChange={handleInputChange}
-            rules={[{ message: "Este campo es obligatorio*" }]}
+            rules={[{ message: t("messages.required") }]}
           />
         );
       case "check":
@@ -246,11 +246,11 @@ function DynamicForms({
                 : []
             }
             rules={[
-              { message: "Este campo es obligatorio*" },
+              { message: t("messages.required") },
               ...(pregunta.validacion?.max_seleccionados !== undefined
                 ? [
                     {
-                      message: `Deben haber máximo ${pregunta.validacion.max_seleccionados} seleccionadas*`,
+                      message: t("messages.maxSelect", {max: pregunta.validacion.max_seleccionados}),
                     },
                   ]
                 : []),
@@ -262,7 +262,7 @@ function DynamicForms({
           <Textarea
             key={pregunta.id}
             label={t(pregunta.pregunta)}
-            placeholder="Escribe un texto"
+            placeholder={t("placeholder.text")}
             max={pregunta.restricciones?.max}
             name={pregunta.id}
             value={formData[pregunta.id] as string}
@@ -282,14 +282,14 @@ function DynamicForms({
     const value = (formData[pregunta.id] as string) || "";
 
     rules.push({
-      message: "Este campo es obligatorio.",
+      message: t("messages.required"),
       isValid: validateRequiredField(value),
     });
 
     if (pregunta.restricciones) {
       if (pregunta.restricciones.min && pregunta.restricciones.max) {
         rules.push({
-          message: `El campo debe tener entre ${pregunta.restricciones.min} y ${pregunta.restricciones.max} caracteres.`,
+          message: t("messages.betweenTextLength", {min: pregunta.restricciones.min, max: pregunta.restricciones.max}),
           isValid: validateLength(
             value,
             pregunta.restricciones.min,
@@ -298,7 +298,7 @@ function DynamicForms({
         });
       } else if (pregunta.restricciones.min) {
         rules.push({
-          message: `El campo debe tener mínimo ${pregunta.restricciones.min} caracteres.`,
+          message: t("messages.minTextLength", {min: pregunta.restricciones.min}),
           isValid: validateLength(value, pregunta.restricciones.min),
         });
       }
@@ -307,24 +307,24 @@ function DynamicForms({
     if (pregunta.validacion) {
       if (pregunta.validacion.formato === "email") {
         rules.push({
-          message: `Debes añadir un email correcto`,
+          message: t("messages.emailFormat"),
           isValid: validateEmailFormat(value),
         });
         if (pregunta.validacion.dominio) {
           rules.push({
-            message: `El dominio del email debe ser ${pregunta.validacion.dominio}.`,
+            message: t("messages.domainEmail", {domain: pregunta.validacion.dominio}),
             isValid: validateDomainEmail(value, pregunta.validacion.dominio),
           });
         }
       }
       if (pregunta.id === "fecha_nacimiento") {
         rules.push({
-          message: 'Debes añadir una fecha válida separada por "/".',
+          message: t("messages.dateFormat"),
           isValid: validateBirthDateFormat(value),
         });
         if (pregunta.validacion.min_edad) {
           rules.push({
-            message: `Debes tener al menos ${pregunta.validacion.min_edad} años.`,
+            message: t("messages.minAge", {age: pregunta.validacion.min_edad}),
             isValid:
               validateBirthDateFormat(value) &&
               validateAge(value, pregunta.validacion.min_edad),

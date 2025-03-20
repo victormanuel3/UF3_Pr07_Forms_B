@@ -1,6 +1,7 @@
 [
   {
     "titulo": "form1.formTitle",
+    "descripcion": "form1.description",
     "preguntas": [
       {
         "id": "nombre",
@@ -66,6 +67,7 @@
   },
   {
     "titulo": "form2.formTitle",
+    "descripcion": "form2.description",
     "preguntas": [
       {
         "id": "comentarios_curso",
@@ -92,7 +94,10 @@
         "opciones": [
           "form2.inputContent.question3.yes",
           "form2.inputContent.question3.no"
-        ]
+        ],
+        "validacion": {
+          "max_seleccionados": 1
+        }
       },
       {
         "id": "horarios",
@@ -114,6 +119,7 @@
   },
   {
     "titulo": "form3.formTitle",
+    "descripcion": "form3.description",
     "preguntas": [
       {
         "id": "comentarios_tecnologia",
@@ -158,6 +164,7 @@
   },
   {
     "titulo": "form4.formTitle",
+    "descripcion": "form4.description",
     "preguntas": [
       {
         "id": "comentarios_cine",
@@ -198,12 +205,7 @@
         "tipo": "select",
         "pregunta": "form4.inputTitle.question4",
         "respuesta": "4",
-        "opciones": [
-          {
-            "grupo": "form4.inputContent.question3.text",
-            "valores": ["1", "2", "3", "4", "5"]
-          }
-        ]
+        "opciones": ["1", "2", "3", "4", "5"]
       }
     ]
   }

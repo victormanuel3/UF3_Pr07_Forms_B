@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router";
+import LanguageSwitch from "../components/LanguageSwitch";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ const Header = () => {
 
   return (
     <div>
-      <header className="w-screen h-24 mb-24 font-gabarito text-stone-800 ">
-        <div className="flex items-center justify-between h-full">
+      <header className="max-w-screen h-24 mb-24 font-gabarito text-stone-800 ">
+        <div className="flex items-center justify-between max-h-screen">
           <div
             onClick={() => navigate("/")}
             className="bg-stone-50 h-[80px] w-[80px] rounded-full m-5"
@@ -36,9 +37,7 @@ const Header = () => {
           >
             {title}
           </p>
-          <div className="flex justify-center items-center">
-            <button className="bg-stone-50 w-12 h-12 mt-2 mr-5 rounded-full"></button>
-          </div>
+          <LanguageSwitch />
         </div>
       </header>
     </div>

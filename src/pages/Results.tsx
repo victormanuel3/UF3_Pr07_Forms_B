@@ -1,7 +1,9 @@
-import Button from "../components/Button";
+import { useTranslation } from "react-i18next";
 import { ResponsesDisplay } from "../components/ResponsesDisplay";
 
 const Results = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="max-h-screen flex justify-center gap-30 pb-40">
       <div className="w-lg text-left flex-column">
@@ -10,7 +12,7 @@ const Results = () => {
           <h3 className="mb-5 inline-block">FORMS</h3>
         </div>
         <h1 className="uppercase font-bold text-7xl font-righteous mb-5 text-pink-600">
-          TUS RESPUESTAS
+          {t("formComplete.answers")}
         </h1>
         <p className="my-5">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque error
