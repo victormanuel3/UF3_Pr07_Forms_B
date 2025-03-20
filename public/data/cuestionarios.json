@@ -1,11 +1,12 @@
 [
   {
-    "titulo": "Datos del Usuario",
+    "titulo": "form1.formTitle",
     "preguntas": [
       {
         "id": "nombre",
         "tipo": "text",
-        "pregunta": "¿Cuál es tu nombre?",
+        "pregunta": "form1.inputTitle.question1",
+        "respuesta": "",
         "restricciones": {
           "min": 3,
           "max": 50
@@ -14,7 +15,8 @@
       {
         "id": "fecha_nacimiento",
         "tipo": "text",
-        "pregunta": "¿Cuál es tu fecha de nacimiento?",
+        "pregunta": "form1.inputTitle.question2",
+        "respuesta": "",
         "restricciones": {
           "min": 1,
           "max": 10
@@ -26,7 +28,8 @@
       {
         "id": "email",
         "tipo": "text",
-        "pregunta": "¿Cuál es tu correo electrónico?",
+        "pregunta": "form1.inputTitle.question3",
+        "respuesta": "",
         "restricciones": {
           "min": 5,
           "max": 100
@@ -39,24 +42,36 @@
       {
         "id": "sexo",
         "tipo": "select",
-        "pregunta": "¿Cuál es tu sexo?",
-        "opciones": ["Masculino", "Femenino", "Otro"]
+        "pregunta": "form1.inputTitle.question4",
+        "respuesta": "",
+        "opciones": [
+          "form1.inputContent.question4.opt1",
+          "form1.inputContent.question4.opt2",
+          "form1.inputContent.question4.opt3"
+        ]
       },
       {
         "id": "preferencias",
         "tipo": "check",
-        "pregunta": "¿Qué prefieres hacer en tu tiempo libre?",
-        "opciones": ["Leer", "Deportes", "Viajar", "Cine"]
+        "pregunta": "form1.inputTitle.question5",
+        "respuesta": "",
+        "opciones": [
+          "form1.inputContent.question5.opt1",
+          "form1.inputContent.question5.opt2",
+          "form1.inputContent.question5.opt3",
+          "form1.inputContent.question5.opt4"
+        ]
       }
     ]
   },
   {
-    "titulo": "Evaluación Académica",
+    "titulo": "form2.formTitle",
     "preguntas": [
       {
         "id": "comentarios_curso",
         "tipo": "textarea",
-        "pregunta": "¿Qué mejorarías en el curso?",
+        "pregunta": "form2.inputTitle.question1",
+        "respuesta": "",
         "restricciones": {
           "min": 15,
           "max": 250
@@ -65,25 +80,31 @@
       {
         "id": "satisfaccion",
         "tipo": "select",
-        "pregunta": "¿Qué tan satisfecho estás con el contenido del curso?",
+        "pregunta": "form2.inputTitle.question2",
+        "respuesta": "4",
         "opciones": ["1", "2", "3", "4", "5"]
       },
       {
         "id": "asistencia",
         "tipo": "check",
-        "pregunta": "¿Asististe a todas las clases?",
-        "opciones": ["sí", "no"]
+        "pregunta": "form2.inputTitle.question3",
+        "respuesta": "no",
+        "opciones": [
+          "form2.inputContent.question3.yes",
+          "form2.inputContent.question3.no"
+        ]
       },
       {
         "id": "horarios",
         "tipo": "check",
-        "pregunta": "¿Cuáles horarios prefieres para las clases?",
+        "pregunta": "form2.inputTitle.question4",
+        "respuesta": [],
         "opciones": [
-          "Lunes 9:00 AM - 11:00 AM",
-          "Martes 3:00 PM - 5:00 PM",
-          "Miércoles 10:00 AM - 12:00 PM",
-          "Jueves 1:00 PM - 3:00 PM",
-          "Viernes 4:00 PM - 6:00 PM"
+          "form2.inputContent.question4.opt1",
+          "form2.inputContent.question4.opt2",
+          "form2.inputContent.question4.opt3",
+          "form2.inputContent.question4.opt4",
+          "form2.inputContent.question4.opt5"
         ],
         "validacion": {
           "max_seleccionados": 2
@@ -92,12 +113,13 @@
     ]
   },
   {
-    "titulo": "Preferencias en Tecnología",
+    "titulo": "form3.formTitle",
     "preguntas": [
       {
         "id": "comentarios_tecnologia",
         "tipo": "textarea",
-        "pregunta": "¿Qué tecnología te gustaría aprender en el futuro?",
+        "pregunta": "form3.inputTitle.question1",
+        "respuesta": "Me gustaría aprender sobre inteligencia artificial y machine learning.",
         "restricciones": {
           "min": 20,
           "max": 200
@@ -106,14 +128,21 @@
       {
         "id": "sistema_operativo",
         "tipo": "select",
-        "pregunta": "¿Qué sistema operativo prefieres usar?",
+        "pregunta": "form3.inputTitle.question2",
+        "respuesta": "Linux",
         "opciones": ["Windows", "Linux", "MacOS"]
       },
       {
         "id": "productos",
         "tipo": "check",
-        "pregunta": "¿Qué dispositivos usas regularmente? (Selecciona hasta 2 opciones)",
-        "opciones": ["smartphone", "laptop", "tablet", "smartwatch"],
+        "pregunta": "form3.inputTitle.question3",
+        "respuesta": ["form3.inputContent.question3.opt1"],
+        "opciones": [
+          "form3.inputContent.question3.opt1",
+          "form3.inputContent.question3.opt2",
+          "form3.inputContent.question3.opt3",
+          "form3.inputContent.question3.opt4"
+        ],
         "validacion": {
           "max_seleccionados": 2
         }
@@ -121,18 +150,20 @@
       {
         "id": "tiempo",
         "tipo": "select",
-        "pregunta": "¿Cuántas horas a la semana dedicas a aprender sobre tecnología?",
+        "pregunta": "form3.inputTitle.question4",
+        "respuesta": "5",
         "opciones": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
       }
     ]
   },
   {
-    "titulo": "Preferencias de Cine",
+    "titulo": "form4.formTitle",
     "preguntas": [
       {
         "id": "comentarios_cine",
         "tipo": "textarea",
-        "pregunta": "¿Qué género de películas prefieres?",
+        "pregunta": "form4.inputTitle.question1",
+        "respuesta": "Acción, ciencia ficción y comedia.",
         "restricciones": {
           "min": 10,
           "max": 150
@@ -141,20 +172,38 @@
       {
         "id": "favorito",
         "tipo": "select",
-        "pregunta": "¿Cuál es tu película favorita?",
-        "opciones": ["Inception", "The Matrix", "Avengers", "Titanic"]
+        "pregunta": "form4.inputTitle.question2",
+        "respuesta": "form4.inputContent.question2.opt1",
+        "opciones": [
+          "form4.inputContent.question2.opt1",
+          "form4.inputContent.question2.opt2",
+          "form4.inputContent.question2.opt3",
+          "form4.inputContent.question2.opt4"
+        ]
       },
       {
         "id": "vista",
         "tipo": "check",
-        "pregunta": "¿Has visto alguna de las siguientes películas?",
-        "opciones": ["Inception", "The Matrix", "Avengers", "Titanic"]
+        "pregunta": "form4.inputTitle.question3",
+        "respuesta": "sí",
+        "opciones": [
+          "form4.inputContent.question2.opt1",
+          "form4.inputContent.question2.opt2",
+          "form4.inputContent.question2.opt3",
+          "form4.inputContent.question2.opt4"
+        ]
       },
       {
         "id": "frecuencia",
         "tipo": "select",
-        "pregunta": "¿Con qué frecuencia ves películas?",
-        "opciones": ["1", "2", "3", "4", "5"]
+        "pregunta": "form4.inputTitle.question4",
+        "respuesta": "4",
+        "opciones": [
+          {
+            "grupo": "form4.inputContent.question3.text",
+            "valores": ["1", "2", "3", "4", "5"]
+          }
+        ]
       }
     ]
   }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Button from "../components/Button";
 import Checkbox from "../components/Checkbox";
 import Input from "../components/Input";
@@ -24,6 +25,7 @@ function DynamicForms({
   onPrev,
   isFirstStep,
 }: DynamicFormProps) {
+  const { t } = useTranslation();
   const currentForm = cuestionarios[currentFormIndex];
   // ----------------------
   type FormValue = string | string[] | number | number[];
@@ -206,7 +208,7 @@ function DynamicForms({
             key={pregunta.id}
             onChange={handleInputChange}
             rules={getValidationRules(pregunta)}
-            label={pregunta.pregunta}
+            label={t(pregunta.pregunta)}
             name={pregunta.id}
             placeholder={
               pregunta.id === "fecha_nacimiento" || pregunta.id === "fecha"
@@ -221,10 +223,10 @@ function DynamicForms({
           <Select
             key={pregunta.id}
             name={pregunta.id}
-            label={pregunta.pregunta}
+            label={t(pregunta.pregunta)}
             placeholder="Select an option"
-            options={pregunta.opciones || []}
-            value={formData[pregunta.id] as string}
+            options={pregunta.opciones?.map((opcion) => t(opcion)) || []}
+            value={t(formData[pregunta.id] as string)}
             onChange={handleInputChange}
             rules={[{ message: "Este campo es obligatorio*" }]}
           />
@@ -233,8 +235,8 @@ function DynamicForms({
         return (
           <Checkbox
             key={pregunta.id}
-            label={pregunta.pregunta}
-            options={pregunta.opciones || []}
+            label={t(pregunta.pregunta)}
+            options={pregunta.opciones?.map((opcion) => t(opcion)) || []}
             onSelectOption={(option) =>
               handleCheckboxChange(pregunta.id, option)
             }
@@ -259,7 +261,7 @@ function DynamicForms({
         return (
           <Textarea
             key={pregunta.id}
-            label={pregunta.pregunta}
+            label={t(pregunta.pregunta)}
             placeholder="Escribe un texto"
             max={pregunta.restricciones?.max}
             name={pregunta.id}

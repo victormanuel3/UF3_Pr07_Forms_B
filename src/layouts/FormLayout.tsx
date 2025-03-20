@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import cuestionariosJson from "../../public/data/cuestionarios.json";
 import { useNavigate } from "react-router";
 import Button from "../components/Button";
 import LoadingCircleSpinner from "../components/Loading";
@@ -12,13 +14,14 @@ function FormLayout() {
   const [cuestionarios, setCuestionarios] = useState<FormSection[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
   const handleNext = () => {
     if (progress < cuestionarios.length) {
       setProgress(progress + 1);
-      setTitle(cuestionarios[progress].titulo);
+      setTitle(t(cuestionarios[progress].titulo));
     } else {
       setIsCompleted(true);
     }
@@ -41,7 +44,7 @@ function FormLayout() {
         localStorage.setItem("preguntas-cuestionario", JSON.stringify(data));
         setIsLoading(false);
         if (data.length > 0) {
-          setTitle(data[0].titulo);
+          setTitle(t(data[0].titulo));
         }
       } catch (error) {
         console.error("Error:", error);
@@ -50,8 +53,8 @@ function FormLayout() {
     };
 
     fetchCuestionarios();
-  }, []);
-
+  }, [t]);
+    
   return (
     <m.div
       initial={{ opacity: 0 }}
