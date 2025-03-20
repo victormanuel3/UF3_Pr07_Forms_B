@@ -23,7 +23,7 @@ function Landing() {
           <h3 className="mb-5 inline-block">FORMS</h3>
         </div>
         <h1 className="uppercase font-bold text-9xl font-righteous mb-5 text-pink-600">
-          FORMS LTD.
+          FORMS MAV
         </h1>
         <p className="mb-10 w-lg">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam

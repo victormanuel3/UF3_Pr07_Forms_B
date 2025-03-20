@@ -111,6 +111,9 @@
   },
   "footer": {
     "resources": "Recursos",
-    "contact": "Síguenos"
+    "contact": "Síguenos",
+    "privacyPolicy": "Política de privacidad",
+    "termsConditions": "Términos & Condiciones",
+    "rights": "Todos los Derechos Reservados."
   }
 }

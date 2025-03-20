@@ -33,7 +33,6 @@ function FormLayout() {
       setProgress(progress - 1);
       setTitle(t(cuestionarios[progress - 2].titulo));
       setDescription(t(cuestionarios[progress - 2].descripcion));
-      console.log(cuestionarios[progress - 2].descripcion);
     }
   };
 

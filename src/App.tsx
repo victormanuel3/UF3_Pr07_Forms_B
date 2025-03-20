@@ -5,7 +5,6 @@ import FormLayout from "./layouts/FormLayout.tsx";
 import Header from "./layouts/Header.tsx";
 import Landing from "./pages/Landing.tsx";
 import Results from "./pages/Results.tsx";
-import LanguageSwitch from "./components/LanguageSwitch.tsx";
 
 function App() {
   return (

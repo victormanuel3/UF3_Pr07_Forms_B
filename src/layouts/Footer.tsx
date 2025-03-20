@@ -27,7 +27,7 @@ const Footer = () => {
                   alt="Logo"
                 />
                 <span className="self-center text-2xl whitespace-nowrap font-righteous">
-                  FORMS LTD.
+                  FORMS MAV
                 </span>
               </a>
               <div className="mt-5 flex flex-col items-start">
@@ -92,7 +92,7 @@ const Footer = () => {
                       href="#"
                       className="hover:underline hover:text-emerald-400"
                     >
-                      Privacy Policy
+                      {t("footer.privacyPolicy")}
                     </a>
                   </li>
                   <li>
@@ -100,7 +100,7 @@ const Footer = () => {
                       href="#"
                       className="hover:underline hover:text-emerald-400"
                     >
-                      Terms &amp; Conditions
+                      {t("footer.termsConditions")}
                     </a>
                   </li>
                 </ul>
@@ -114,7 +114,7 @@ const Footer = () => {
               <a href="#" className="hover:underline">
                 FORMS™
               </a>
-              . All Rights Reserved.
+              . {t("footer.rights")}
             </span>
             <div className="flex mt-4 sm:justify-center sm:mt-0">
               <a href="#" className="text-white hover:text-emerald-400">

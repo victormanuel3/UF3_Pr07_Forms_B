@@ -343,7 +343,7 @@ function DynamicForms({
       animate={{ opacity: 1 }}
       exit={{ opacity: 1 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
-      className="flex flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950"
+      className="flex flex-col gap-5 w-lg max-h-screen p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950"
     >
       {currentForm.preguntas.map((pregunta) => (
         <div key={pregunta.id}>{renderFormField(pregunta)}</div>
