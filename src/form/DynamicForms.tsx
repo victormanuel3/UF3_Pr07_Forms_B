@@ -23,7 +23,10 @@ function DynamicForms({
   onNext,
   onPrev,
   isFirstStep,
+  shouldReset,
+  onResetComplete
 }: DynamicFormProps) {
+
   const { t } = useTranslation();
   const currentForm = cuestionarios[currentFormIndex];
   // ----------------------
@@ -37,6 +40,18 @@ function DynamicForms({
   });
   // ----------------------
   const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    // Si 'shouldReset' es 'true', significa que el componente padre ('FormLayout') solicitó un reinicio
+    if (shouldReset) {
+      setFormData({}); // Borra todas las respuestas del formulario
+      
+      // Notifica al padre que el reset se ha completado, lo que desactiva 'shouldResetForm' en 'FormLayout'
+      if (onResetComplete) {
+        onResetComplete();
+      }
+    }
+  }, [shouldReset, onResetComplete]);
 
   useEffect(() => {
     if (currentForm) {
@@ -214,7 +229,7 @@ function DynamicForms({
                 ? "mm/dd/yyyy"
                 : "Escribe un texto"
             }
-            value={formData[pregunta.id] as string}
+            value={(formData[pregunta.id] || '') as string}
           />
         );
       case "select":
@@ -225,7 +240,7 @@ function DynamicForms({
             label={t(pregunta.pregunta)}
             placeholder="Select a option"
             options={pregunta.opciones?.map((opcion) => t(opcion)) || []}
-            value={t(formData[pregunta.id] as string)}
+            value={t((formData[pregunta.id] || '') as string)}
             onChange={handleInputChange}
             rules={[{ message: "Este campo es obligatorio*" }]}
           />
@@ -264,7 +279,7 @@ function DynamicForms({
             placeholder="Escribe un texto"
             max={pregunta.restricciones?.max}
             name={pregunta.id}
-            value={formData[pregunta.id] as string}
+            value={(formData[pregunta.id] || '') as string}
             onChange={(value) => handleTexareaChange(pregunta.id, value)}
             rules={getValidationRules(pregunta)}
           />
@@ -349,7 +364,6 @@ function DynamicForms({
             icon={<i className="fa-sharp fa-regular fa-arrow-left"></i>}
           />
         )}
-
         <Button
           enabled={isFormValid}
           onClick={onNext}

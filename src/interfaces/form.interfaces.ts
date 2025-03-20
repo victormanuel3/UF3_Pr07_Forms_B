@@ -27,4 +27,6 @@ export interface DynamicFormProps {
     onNext: () => void;
     onPrev: () => void;
     isFirstStep: boolean;
+    shouldReset?: boolean; // Nueva propiedad opcional
+    onResetComplete?: () => void; // Nueva propiedad opcional
 }
