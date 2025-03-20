@@ -1,8 +1,9 @@
+import Button from "../components/Button";
 import { ResponsesDisplay } from "../components/ResponsesDisplay";
 
 const Results = () => {
   return (
-    <div className="h-svh flex justify-center gap-30 pb-40">
+    <div className="max-h-screen flex justify-center gap-30 pb-40">
       <div className="w-lg text-left flex-column">
         <div className="items-center">
           <div className="bg-emerald-400 w-40 h-1 inline-block m-2 mb-0.5"></div>
@@ -18,7 +19,7 @@ const Results = () => {
           deleniti saepe consequuntur.
         </p>
       </div>
-      <div className="flex flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950">
+      <div className="flex flex-col gap-5 w-lg max-h-152 p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950">
         <ResponsesDisplay />
       </div>
     </div>

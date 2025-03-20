@@ -15,34 +15,35 @@ import {
   validateRequiredArray,
   validateRequiredField,
 } from "../utils/validation";
+import { motion as m } from "framer-motion";
 
 function DynamicForms({
   cuestionarios,
   currentFormIndex,
   onNext,
   onPrev,
-  isFirstStep
+  isFirstStep,
 }: DynamicFormProps) {
   const currentForm = cuestionarios[currentFormIndex];
   // ----------------------
   type FormValue = string | string[] | number | number[];
   const [formData, setFormData] = useState<Record<string, FormValue>>(() => {
-      const saveData = localStorage.getItem("formResponses")
-      if (saveData) {
-        return JSON.parse(saveData)
-      }
-      return {}
+    const saveData = localStorage.getItem("formResponses");
+    if (saveData) {
+      return JSON.parse(saveData);
+    }
+    return {};
   });
   // ----------------------
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     if (currentForm) {
-      const updatedData = {...formData}    
-      let dataUpdated = false
-      
-    currentForm.preguntas.forEach((pregunta) => {
-        if (updatedData[pregunta.id] === undefined) { 
+      const updatedData = { ...formData };
+      let dataUpdated = false;
+
+      currentForm.preguntas.forEach((pregunta) => {
+        if (updatedData[pregunta.id] === undefined) {
           if (pregunta.tipo === "check") {
             updatedData[pregunta.id] = [];
           } else {
@@ -56,10 +57,10 @@ function DynamicForms({
       }
     }
   }, [currentForm, formData]);
-    
+
   useEffect(() => {
-      localStorage.setItem('formResponses', JSON.stringify(formData));
-      console.log(localStorage.getItem('formResponses'))
+    localStorage.setItem("formResponses", JSON.stringify(formData));
+    console.log(localStorage.getItem("formResponses"));
   }, [formData]);
 
   useEffect(() => {
@@ -335,25 +336,31 @@ function DynamicForms({
   // ---------------------------------------------------------------------------------
 
   return (
-    <div className="flex flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950">
+    <m.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+      className="flex flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950"
+    >
       {currentForm.preguntas.map((pregunta) => (
         <div key={pregunta.id}>{renderFormField(pregunta)}</div>
       ))}
       <div className="flex flex-row justify-end gap-5">
-      {
-        !isFirstStep && <Button
-        enabled={true}
-        onClick={onPrev}
-        icon={<i className="fa-sharp fa-regular fa-arrow-left"></i>}
-      />
-      }
+        {!isFirstStep && (
+          <Button
+            enabled={true}
+            onClick={onPrev}
+            icon={<i className="fa-sharp fa-regular fa-arrow-left"></i>}
+          />
+        )}
         <Button
           enabled={isFormValid}
           onClick={onNext}
           icon={<i className="fa-sharp fa-regular fa-arrow-right"></i>}
         />
       </div>
-    </div>
+    </m.div>
   );
 }
 

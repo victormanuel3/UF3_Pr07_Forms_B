@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { FormSection } from "../interfaces/form.interfaces";
 
-export const ResponsesDisplay = () => {
+export const ResponsesDisplay = () => {  
   const saveData = localStorage.getItem("formResponses");
   if (!saveData) return <p>No hay respuestas registradas</p>;
 
@@ -15,17 +16,16 @@ export const ResponsesDisplay = () => {
 
   return (
     <div className="flex flex-col items-center w-150">
-      <h2 className="text-4xl">Respuestas</h2>
       {(JSON.parse(preguntasCuestionarioString) as FormSection[]).map(
         (cuestionario) => (
           <div className="shadow-md">
             <div className="flex flex-col items-start w-full">
-              <h3 className="text-2xl">{cuestionario.titulo}</h3>
-              <div className="flex flex-col items-start">
+              <h3 className="text-4xl font-righteous text-emerald-500">{cuestionario.titulo}</h3>
+              <div className="mt-10 flex flex-col items-start gap-2">
                 {cuestionario.preguntas.map((pregunta) => (
                   <>
-                    <span>{pregunta.pregunta}</span>
-                    <span>{formResponses[pregunta.id]}</span>
+                    <span className="font-bold color">{pregunta.pregunta}</span>
+                    <span className="mb-5">{formResponses[pregunta.id]}</span>
                   </>
                 ))}
               </div>

@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import LoadingCircleSpinner from "../components/Loading";
 import DynamicForms from "../form/DynamicForms";
 import { FormSection } from "../interfaces/form.interfaces";
+import { motion as m } from "framer-motion";
 
 function FormLayout() {
   const [title, setTitle] = useState("");
@@ -52,7 +53,13 @@ function FormLayout() {
   }, []);
 
   return (
-    <div className="flex justify-center gap-30 pb-40">
+    <m.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+      className="flex justify-center gap-30 pb-40 max-h-screen"
+    >
       <div className="w-lg text-left flex-column">
         <div className="items-center">
           <div className="bg-emerald-400 w-40 h-1 inline-block m-2 mb-0.5"></div>
@@ -128,7 +135,7 @@ function FormLayout() {
           </>
         )}
       </div>
-    </div>
+    </m.div>
   );
 }
 export default FormLayout;

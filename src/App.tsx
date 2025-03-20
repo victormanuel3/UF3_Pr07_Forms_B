@@ -8,18 +8,19 @@ import Results from "./pages/Results.tsx";
 
 function App() {
   return (
-    <div className="font-gabarito bg-purple-200 text-emerald-950">
-        <Header />
+    <div className="font-gabarito bg-purple-200 text-emerald-950"
+    >
+      <Header />
 
-        <div className="min-h-screen">
+      <div className="max-h-screen">
         <Routes>
-          <Route path="/home" element={<Landing />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/forms" element={<FormLayout />} />
           <Route path="/results" element={<Results />} />
         </Routes>
-        </div>
+      </div>
 
-        <Footer />
+      <Footer />
     </div>
   );
 }
