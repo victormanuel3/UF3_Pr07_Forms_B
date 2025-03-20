@@ -16,7 +16,7 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="bg-pink-700 text-white">
+      <footer className="bg-blue-800 text-white">
         <div className="mx-auto w-full max-w-screen-3xl p-10 lg:py-8">
           <div className="md:flex md:justify-between text-white">
             <div className="mb-6 md:mb-0">

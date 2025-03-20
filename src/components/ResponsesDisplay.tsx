@@ -20,16 +20,28 @@ export const ResponsesDisplay = () => {
     <div className="flex flex-col items-center w-150">
       {(JSON.parse(preguntasCuestionarioString) as FormSection[]).map(
         (cuestionario) => (
-          <div className="shadow-md">
+          <div className="border-2 rounded-2xl py-5 px-20 mb-10 ml-5">
             <div className="flex flex-col items-start w-full">
-              <h3 className="text-4xl font-righteous text-emerald-500">
+              <h3 className="text-4xl font-righteous text-emerald-500 uppercase">
                 {t(cuestionario.titulo)}
               </h3>
               <div className="mt-10 flex flex-col items-start gap-2">
                 {cuestionario.preguntas.map((pregunta) => (
                   <>
-                    <span className="font-bold color">{t(pregunta.pregunta)}</span>
-                    <span className="mb-5">{formResponses[pregunta.id]}</span>
+                    <span className="font-bold text-left color">
+                      {t(pregunta.pregunta)}
+                    </span>
+                    <div className=",b-5 text-left">
+                      {Array.isArray(formResponses[pregunta.id]) ? (
+                        formResponses[pregunta.id].map(
+                          (response: string, index: number) => (
+                            <div key={index}>{response}</div>
+                          )
+                        )
+                      ) : (
+                        <span>{formResponses[pregunta.id]}</span>
+                      )}
+                    </div>
                   </>
                 ))}
               </div>

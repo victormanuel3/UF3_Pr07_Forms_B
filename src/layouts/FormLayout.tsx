@@ -70,7 +70,7 @@ function FormLayout() {
           <div className="bg-emerald-400 w-40 h-1 inline-block m-2 mb-0.5"></div>
           <h3 className="mb-5 inline-block">FORMS</h3>
         </div>
-        <h1 className="uppercase font-bold text-7xl font-righteous mb-5 text-pink-600">
+        <h1 className="uppercase font-bold text-7xl font-righteous mb-5 text-blue-600">
           {isCompleted ? t("formComplete.complete") : title}
         </h1>
         <p className="my-5">{description}</p>
@@ -102,8 +102,8 @@ function FormLayout() {
                 </li>
               ))}
               <li
-                className={`w-14 flex justify-center items-center h-14 rounded-full
-                ${isCompleted ? "bg-emerald-400" : "bg-gray-100"}`}
+                className={`w-14 flex justify-center items-center h-14 rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]
+                ${isCompleted ? "bg-emerald-400" : "bg-stone-50"}`}
               >
                 <svg
                   width="21"

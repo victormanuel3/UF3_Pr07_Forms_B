@@ -21,7 +21,7 @@ const Results = () => {
           deleniti saepe consequuntur.
         </p>
       </div>
-      <div className="flex flex-col gap-5 w-lg max-h-152 p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950">
+      <div className="flex flex-col gap-5 w-2xl max-h-152 p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950 overflow-x-hidden">
         <ResponsesDisplay />
       </div>
     </div>

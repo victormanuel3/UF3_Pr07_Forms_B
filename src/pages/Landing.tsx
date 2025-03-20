@@ -1,8 +1,8 @@
 import { motion as m } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import Button from "../components/Button";
 import PathDrawing from "../components/PathDrawing";
-import { useTranslation } from "react-i18next";
 
 function Landing() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ function Landing() {
           <div className="bg-emerald-400 w-40 h-1 inline-block m-2 mb-0.5"></div>
           <h3 className="mb-5 inline-block">FORMS</h3>
         </div>
-        <h1 className="uppercase font-bold text-9xl font-righteous mb-5 text-pink-600">
+        <h1 className="uppercase font-bold text-9xl font-righteous mb-5 text-blue-600">
           FORMS MAV
         </h1>
         <p className="mb-10 w-lg">

@@ -8,7 +8,7 @@ import Results from "./pages/Results.tsx";
 
 function App() {
   return (
-    <div className="font-gabarito bg-purple-200 text-emerald-950">
+    <div className="font-gabarito bg-blue-50 text-emerald-950">
       <Header />
 
       <div className="max-h-screen">
