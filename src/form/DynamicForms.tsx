@@ -250,7 +250,9 @@ function DynamicForms({
               ...(pregunta.validacion?.max_seleccionados !== undefined
                 ? [
                     {
-                      message: t("messages.maxSelect", {max: pregunta.validacion.max_seleccionados}),
+                      message: t("messages.maxSelect", {
+                        max: pregunta.validacion.max_seleccionados,
+                      }),
                     },
                   ]
                 : []),
@@ -289,7 +291,10 @@ function DynamicForms({
     if (pregunta.restricciones) {
       if (pregunta.restricciones.min && pregunta.restricciones.max) {
         rules.push({
-          message: t("messages.betweenTextLength", {min: pregunta.restricciones.min, max: pregunta.restricciones.max}),
+          message: t("messages.betweenTextLength", {
+            min: pregunta.restricciones.min,
+            max: pregunta.restricciones.max,
+          }),
           isValid: validateLength(
             value,
             pregunta.restricciones.min,
@@ -298,7 +303,9 @@ function DynamicForms({
         });
       } else if (pregunta.restricciones.min) {
         rules.push({
-          message: t("messages.minTextLength", {min: pregunta.restricciones.min}),
+          message: t("messages.minTextLength", {
+            min: pregunta.restricciones.min,
+          }),
           isValid: validateLength(value, pregunta.restricciones.min),
         });
       }
@@ -312,7 +319,9 @@ function DynamicForms({
         });
         if (pregunta.validacion.dominio) {
           rules.push({
-            message: t("messages.domainEmail", {domain: pregunta.validacion.dominio}),
+            message: t("messages.domainEmail", {
+              domain: pregunta.validacion.dominio,
+            }),
             isValid: validateDomainEmail(value, pregunta.validacion.dominio),
           });
         }
@@ -324,7 +333,9 @@ function DynamicForms({
         });
         if (pregunta.validacion.min_edad) {
           rules.push({
-            message: t("messages.minAge", {age: pregunta.validacion.min_edad}),
+            message: t("messages.minAge", {
+              age: pregunta.validacion.min_edad,
+            }),
             isValid:
               validateBirthDateFormat(value) &&
               validateAge(value, pregunta.validacion.min_edad),

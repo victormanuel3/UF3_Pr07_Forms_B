@@ -29,7 +29,7 @@
     "inputTitle": {
       "question1": "¿Qué mejorarías en el curso? *",
       "question2": "¿Qué tan satisfecho estás con el contenido del curso? *",
-      "question3": "¿Asististe a todas las clases? *",
+      "question3": "¿Asististe a todas las clases? (Selecciona 1 opción) *",
       "question4": "¿Cuáles horarios prefieres para las clases? (Selecciona hasta 2 opciones) *"
     },
     "inputContent": {
@@ -52,7 +52,7 @@
       "description": "Un breve cuestionario para conocer qué sistemas, dispositivos y herramientas tecnológicas usas con más frecuencia, además de los temas que te gustaría aprender en el futuro.",
     "inputTitle": {
       "question1": "¿Qué tecnología te gustaría aprender en el futuro? *",
-      "question2": "¿Qué sistema operativo prefieres usar? (Selecciona 1 opción) *",
+      "question2": "¿Qué sistema operativo prefieres usar? *",
       "question3": "¿Qué dispositivos usas regularmente? (Selecciona hasta 2 opciones) *",
       "question4": "¿Cuántas horas a la semana dedicas a aprender sobre tecnología? *"
     },

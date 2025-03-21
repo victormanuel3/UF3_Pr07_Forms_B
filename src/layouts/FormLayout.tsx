@@ -2,6 +2,7 @@ import { motion as m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import robotics from "../../public/img/robotics.gif";
 import Button from "../components/Button";
 import LoadingCircleSpinner from "../components/Loading";
 import DynamicForms from "../form/DynamicForms";
@@ -63,7 +64,7 @@ function FormLayout() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 1 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
-      className="flex justify-center gap-30 pb-40 max-h-screen"
+      className="flex justify-center gap-30"
     >
       <div className="w-lg text-left flex-column">
         <div className="items-center">
@@ -130,7 +131,10 @@ function FormLayout() {
                 isFirstStep={progress === 1}
               />
             ) : (
-              <div>{/* IMAGE */}</div>
+              <div>
+                <img src={robotics} alt="Robot Illustration" />
+                <a href="https://storyset.com/technology" className="text-xs text-blue-400">Technology illustrations by Storyset</a>
+              </div>
             )}
           </>
         )}

@@ -11,7 +11,7 @@ function App() {
     <div className="font-gabarito bg-blue-50 text-emerald-950">
       <Header />
 
-      <div className="max-h-screen">
+      <div className="min-h-screen">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/forms" element={<FormLayout />} />

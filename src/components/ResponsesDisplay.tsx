@@ -31,16 +31,25 @@ export const ResponsesDisplay = () => {
                     <span className="font-bold text-left color">
                       {t(pregunta.pregunta)}
                     </span>
-                    <div className=",b-5 text-left">
-                      {Array.isArray(formResponses[pregunta.id]) ? (
-                        formResponses[pregunta.id].map(
-                          (response: string, index: number) => (
-                            <div key={index}>{response}</div>
-                          )
-                        )
-                      ) : (
-                        <span>{formResponses[pregunta.id]}</span>
-                      )}
+                    <div className="mb-5 text-left">
+                      {(() => {
+                        switch (pregunta.id) {
+                          case "sexo":
+                            return <div>{t(formResponses[pregunta.id])}</div>
+                          case "horarios":
+                            return <div>horarios</div>;
+                          default:
+                            return Array.isArray(formResponses[pregunta.id]) ? (
+                              formResponses[pregunta.id].map(
+                                (response: string, index: number) => (
+                                  <div key={index}>{response}</div>
+                                )
+                              )
+                            ) : (
+                              <span>{formResponses[pregunta.id]}</span>
+                            );
+                        }
+                      })()}
                     </div>
                   </>
                 ))}
