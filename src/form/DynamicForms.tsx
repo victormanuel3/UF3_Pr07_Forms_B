@@ -23,6 +23,8 @@ function DynamicForms({
   onNext,
   onPrev,
   isFirstStep,
+  shouldReset,
+  onResetComplete
 }: DynamicFormProps) {
 
   /** Función que se usa para traducir los textos. Se aplica en etiquetas, placeholders y mensajes. */
@@ -304,7 +306,7 @@ function DynamicForms({
                 ? "mm/dd/yyyy"
                 : "Escribe un texto"
             }
-            value={formData[pregunta.id] as string}
+            value={(formData[pregunta.id] || '') as string}
           />
         );
       case "select":
@@ -357,7 +359,7 @@ function DynamicForms({
             placeholder="Escribe un texto"
             max={pregunta.restricciones?.max}
             name={pregunta.id}
-            value={formData[pregunta.id] as string}
+            value={(formData[pregunta.id] || '') as string}
             onChange={(value) => handleTexareaChange(pregunta.id, value)}
             rules={getValidationRules(pregunta)}
           />
@@ -478,7 +480,6 @@ function DynamicForms({
             icon={<i className="fa-sharp fa-regular fa-arrow-left"></i>}
           />
         )}
-
         <Button
           enabled={isFormValid}
           onClick={onNext}
