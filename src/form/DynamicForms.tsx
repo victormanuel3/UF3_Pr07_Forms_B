@@ -1,3 +1,4 @@
+import { motion as m } from "framer-motion";
 import { ReactElement, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../components/Button";
@@ -316,7 +317,7 @@ function DynamicForms({
               // Configura placeholder específico para campos de fecha o texto general
               pregunta.id === "fecha_nacimiento" || pregunta.id === "fecha" 
                 ? "mm/dd/yyyy"
-                : "Escribe un texto"
+                : t("placeholder.text")
             }
             value={(formData[pregunta.id] || '') as string}
           />
@@ -327,11 +328,11 @@ function DynamicForms({
             key={pregunta.id}
             name={pregunta.id}
             label={t(pregunta.pregunta)}
-            placeholder="Select a option"
-            options={pregunta.opciones?.map((opcion) => t(opcion)) || []} 
+            placeholder={t("placeholder.select")}
+            options={pregunta.opciones?.map((opcion) => t(opcion)) || []}
             value={t(formData[pregunta.id] as string)}
             onChange={handleInputChange}
-            rules={[{ message: "Este campo es obligatorio*" }]}
+            rules={[{ message: t("messages.required") }]}
           />
         );
       case "check":
@@ -351,12 +352,14 @@ function DynamicForms({
             }
             rules={[
               // Regla básica de validación para campos obligatorios
-              { message: "Este campo es obligatorio*" },
+              { message: t("messages.required") },
               // Reglas adicionales según configuración de máximo de opciones seleccionables
               ...(pregunta.validacion?.max_seleccionados !== undefined
                 ? [
                     {
-                      message: `Deben haber máximo ${pregunta.validacion.max_seleccionados} seleccionadas*`,
+                      message: t("messages.maxSelect", {
+                        max: pregunta.validacion.max_seleccionados,
+                      }),
                     },
                   ]
                 : []),
@@ -368,7 +371,7 @@ function DynamicForms({
           <Textarea
             key={pregunta.id}
             label={t(pregunta.pregunta)}
-            placeholder="Escribe un texto"
+            placeholder={t("placeholder.text")}
             max={pregunta.restricciones?.max}
             name={pregunta.id}
             value={(formData[pregunta.id] || '') as string}
@@ -401,7 +404,7 @@ function DynamicForms({
 
     // Reglas básica: Campo requerido
     rules.push({
-      message: "Este campo es obligatorio.",
+      message: t("messages.required"),
       isValid: validateRequiredField(value),
     });
 
@@ -410,7 +413,10 @@ function DynamicForms({
       if (pregunta.restricciones.min && pregunta.restricciones.max) {
         // Validación de rango de longitud (mínimo y máximo)
         rules.push({
-          message: `El campo debe tener entre ${pregunta.restricciones.min} y ${pregunta.restricciones.max} caracteres.`,
+          message: t("messages.betweenTextLength", {
+            min: pregunta.restricciones.min,
+            max: pregunta.restricciones.max,
+          }),
           isValid: validateLength(
             value,
             pregunta.restricciones.min,
@@ -420,7 +426,9 @@ function DynamicForms({
       } else if (pregunta.restricciones.min) {
         // Solo validación de longitud mínima
         rules.push({
-          message: `El campo debe tener mínimo ${pregunta.restricciones.min} caracteres.`,
+          message: t("messages.minTextLength", {
+            min: pregunta.restricciones.min,
+          }),
           isValid: validateLength(value, pregunta.restricciones.min),
         });
       }
@@ -431,14 +439,16 @@ function DynamicForms({
       if (pregunta.validacion.formato === "email") {
         // Validación formato email
         rules.push({
-          message: `Debes añadir un email correcto`,
+          message: t("messages.emailFormat"),
           isValid: validateEmailFormat(value),
         });
 
         // Validación adicional de dominio al email si esta especificado
         if (pregunta.validacion.dominio) {
           rules.push({
-            message: `El dominio del email debe ser ${pregunta.validacion.dominio}.`,
+            message: t("messages.domainEmail", {
+              domain: pregunta.validacion.dominio,
+            }),
             isValid: validateDomainEmail(value, pregunta.validacion.dominio),
           });
         }
@@ -448,14 +458,16 @@ function DynamicForms({
       if (pregunta.id === "fecha_nacimiento") {
         // Validación de formato de fecha
         rules.push({
-          message: 'Debes añadir una fecha válida separada por "/".',
+          message: t("messages.dateFormat"),
           isValid: validateBirthDateFormat(value),
         });
 
         // Validación de edad mínima si está configurada
         if (pregunta.validacion.min_edad) {
           rules.push({
-            message: `Debes tener al menos ${pregunta.validacion.min_edad} años.`,
+            message: t("messages.minAge", {
+              age: pregunta.validacion.min_edad,
+            }),
             isValid:
               validateBirthDateFormat(value) &&
               validateAge(value, pregunta.validacion.min_edad),
@@ -477,7 +489,13 @@ function DynamicForms({
    * - El botón siguiente se habilita solo si el formulario es válido.
   */
   return (
-    <div className="flex shadow-[2px_2px_10px_rgba(0,0,0,0.15)] flex-col gap-5 w-lg p-6 rounded-3xl bg-stone-50">
+    <m.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+      className="flex flex-col gap-5 w-lg max-h-screen p-6 rounded-3xl bg-stone-50 drop-shadow-xl shadow-purple-950"
+    >
       {/* Renderiza cada pregunta del formulario actual */}
       {currentForm.preguntas.map((pregunta) => (
         <div key={pregunta.id}>{renderFormField(pregunta)}</div>
@@ -498,7 +516,7 @@ function DynamicForms({
           icon={<i className="fa-sharp fa-regular fa-arrow-right"></i>}
         />
       </div>
-    </div>
+    </m.div>
   );
 }
 

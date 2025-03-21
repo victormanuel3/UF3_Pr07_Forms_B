@@ -1,6 +1,7 @@
 [
   {
     "titulo": "form1.formTitle",
+    "descripcion": "form1.description",
     "preguntas": [
       {
         "id": "nombre",
@@ -66,9 +67,10 @@
   },
   {
     "titulo": "form2.formTitle",
+    "descripcion": "form2.description",
     "preguntas": [
       {
-        "id": "comentarios",
+        "id": "comentarios_curso",
         "tipo": "textarea",
         "pregunta": "form2.inputTitle.question1",
         "respuesta": "",
@@ -92,7 +94,10 @@
         "opciones": [
           "form2.inputContent.question3.yes",
           "form2.inputContent.question3.no"
-        ]
+        ],
+        "validacion": {
+          "max_seleccionados": 1
+        }
       },
       {
         "id": "horarios",
@@ -114,9 +119,10 @@
   },
   {
     "titulo": "form3.formTitle",
+    "descripcion": "form3.description",
     "preguntas": [
       {
-        "id": "comentarios",
+        "id": "comentarios_tecnologia",
         "tipo": "textarea",
         "pregunta": "form3.inputTitle.question1",
         "respuesta": "Me gustaría aprender sobre inteligencia artificial y machine learning.",
@@ -158,9 +164,10 @@
   },
   {
     "titulo": "form4.formTitle",
+    "descripcion": "form4.description",
     "preguntas": [
       {
-        "id": "comentarios",
+        "id": "comentarios_cine",
         "tipo": "textarea",
         "pregunta": "form4.inputTitle.question1",
         "respuesta": "Acción, ciencia ficción y comedia.",

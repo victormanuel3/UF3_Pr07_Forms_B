@@ -19,6 +19,7 @@ export interface FormQuestion {
 export interface FormSection {
     titulo: string;
     preguntas: FormQuestion[];
+    descripcion: string;
 }
 
 export interface DynamicFormProps {
@@ -29,4 +30,8 @@ export interface DynamicFormProps {
     isFirstStep: boolean;
     shouldReset?: boolean; // Nueva propiedad opcional
     onResetComplete?: () => void; // Nueva propiedad opcional
+}
+
+export interface ResultProps {
+  cuestionarios: FormSection[];
 }

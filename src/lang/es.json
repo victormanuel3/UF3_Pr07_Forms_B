@@ -1,12 +1,13 @@
 {
   "form1": {
     "formTitle": "Cuestionario de Datos del Usuario",
+    "description": "Este formulario recopila información general, como nombre, fecha de nacimiento y preferencias personales. Es un registro básico para organizar y contextualizar los datos de cada participante.",
     "inputTitle": {
-      "question1": "¿Cuál es tu nombre?",
-      "question2": "¿Cuál es tu fecha de nacimiento?",
-      "question3": "¿Cuál es tu correo electrónico?",
-      "question4": "¿Cuál es tu genero?",
-      "question5": "¿Qué prefieres hacer en tu tiempo libre?"
+      "question1": "¿Cuál es tu nombre? *",
+      "question2": "¿Cuál es tu fecha de nacimiento? *",
+      "question3": "¿Cuál es tu correo electrónico? *",
+      "question4": "¿Cuál es tu genero? *",
+      "question5": "¿Qué prefieres hacer en tu tiempo libre? *"
     },
     "inputContent": {
       "question4": {
@@ -24,11 +25,12 @@
   },
   "form2": {
     "formTitle": "Cuestionario de Evaluación Académica",
+    "description": "Este cuestionario permite valorar diferentes aspectos del curso, desde el contenido hasta la metodología utilizada. También incluye un espacio para comentarios sobre posibles mejoras.",
     "inputTitle": {
-      "question1": "¿Qué mejorarías en el curso?",
-      "question2": "¿Qué tan satisfecho estás con el contenido del curso?",
-      "question3": "¿Asististe a todas las clases?",
-      "question4": "¿Cuáles horarios prefieres para las clases? (Selecciona hasta 2 opciones)"
+      "question1": "¿Qué mejorarías en el curso? *",
+      "question2": "¿Qué tan satisfecho estás con el contenido del curso? *",
+      "question3": "¿Asististe a todas las clases? (Selecciona 1 opción) *",
+      "question4": "¿Cuáles horarios prefieres para las clases? (Selecciona hasta 2 opciones) *"
     },
     "inputContent": {
       "question1": "El contenido del curso está bien, pero sería útil más ejemplos prácticos.",
@@ -47,11 +49,12 @@
   },
   "form3": {
     "form1Title": "Encuesta de Preferencias en Tecnología",
+      "description": "Un breve cuestionario para conocer qué sistemas, dispositivos y herramientas tecnológicas usas con más frecuencia, además de los temas que te gustaría aprender en el futuro.",
     "inputTitle": {
-      "question1": "¿Qué tecnología te gustaría aprender en el futuro?",
-      "question2": "¿Qué sistema operativo prefieres usar?",
-      "question3": "¿Qué dispositivos usas regularmente? (Selecciona hasta 2 opciones)",
-      "question4": "¿Cuántas horas a la semana dedicas a aprender sobre tecnología?"
+      "question1": "¿Qué tecnología te gustaría aprender en el futuro? *",
+      "question2": "¿Qué sistema operativo prefieres usar? *",
+      "question3": "¿Qué dispositivos usas regularmente? (Selecciona hasta 2 opciones) *",
+      "question4": "¿Cuántas horas a la semana dedicas a aprender sobre tecnología? *"
     },
     "inputContent": {
       "question3": {
@@ -64,6 +67,7 @@
   },
   "form4": {
     "formTitle": "Encuesta de Preferencias de Cine",
+    "description": "Aquí se recopilan datos sobre los géneros de películas que más disfrutas, las que has visto y con qué frecuencia sueles ver cine.",
     "inputTitle": {
       "question1": "¿Qué género de películas prefieres?",
       "question2": "¿Cuál es tu película favorita?",
@@ -81,5 +85,35 @@
         "text": "Opción 1-5 veces al mes"
       }
     }
+  },
+  "formComplete": {
+    "complete": "¡Completado!",
+    "description": "",
+    "answers": "Tus respuestas"
+  },
+  "placeholder": {
+    "text": "Escribe un texto",
+    "select": "Selecciona una opción"
+  },
+  "messages": {
+    "required": "Este campo es obligatorio.",
+    "maxSelect": "Deben haber máximo {{max}} seleccionadas.",
+    "betweenTextLength": "El campo debe tener entre {{min}} y {{max}} caracteres.",
+    "minTextLength": "El campo debe tener mínimo {{min}} caracteres.",
+    "emailFormat": "Debes añadir un email correcto.",
+    "domainEmail": "El dominio del email debe ser {{domain}}.",
+    "dateFormat": "Debes añadir una fecha válida separada por \"/\".",
+    "minAge": "Debes tener al menos {{age}} años."
+  },
+  "buttons": {
+    "start": "¡Empezar!",
+    "results": "Ver respuestas"
+  },
+  "footer": {
+    "resources": "Recursos",
+    "contact": "Síguenos",
+    "privacyPolicy": "Política de privacidad",
+    "termsConditions": "Términos & Condiciones",
+    "rights": "Todos los Derechos Reservados."
   }
 }

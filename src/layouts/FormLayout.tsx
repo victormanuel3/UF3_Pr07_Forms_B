@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { motion as m } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import cuestionariosJson from "../../public/data/cuestionarios.json";
+import { useNavigate } from "react-router";
+import robotics from "../../public/img/robotics.gif";
+import Button from "../components/Button";
 import DynamicForms from "../form/DynamicForms";
 import { FormSection } from "../interfaces/form.interfaces";
 
@@ -20,12 +23,14 @@ import { FormSection } from "../interfaces/form.interfaces";
 function FormLayout() {
 
   const [title, setTitle] = useState(""); // Título del cuestionario actual, 
+  const [description, setDescription] = useState("");
   const [progress, setProgress] = useState(1); // índice del cuestionario actual.
   const [cuestionarios, setCuestionarios] = useState<FormSection[]>([]); // Listado de los cuestionarios.
   const [isLoading, setIsLoading] = useState(true); // Controla el estado de carga.
   const [isCompleted, setIsCompleted] = useState(false); // Indica si se han completado todos los cuestionarios.
   const { t } = useTranslation(); // Función para traducir textos.
   const [shouldResetForm, setShouldResetForm] = useState(false); //Estado que indica si el formulario debe reiniciarse.
+  const navigate = useNavigate();
 
   /**
    * Esta función maneja la navegación al siguiente cuestionario.
@@ -40,6 +45,7 @@ function FormLayout() {
     if (progress < cuestionarios.length) {
       setProgress(progress + 1);
       setTitle(t(cuestionarios[progress].titulo));
+      setDescription(t(cuestionarios[progress].descripcion));
     } else {
       setIsCompleted(true);
     }
@@ -55,11 +61,10 @@ function FormLayout() {
    * @returns {void} No retorna ningún valor, solo actualiza los estados.
    * **/
   const handlePrev = () => {
-    console.log("before", progress);
     if (progress > 1) {
       setProgress(progress - 1);
-      console.log("after", progress);
-      setTitle(cuestionarios[progress - 2].titulo);
+      setTitle(t(cuestionarios[progress - 2].titulo));
+      setDescription(t(cuestionarios[progress - 2].descripcion));
     }
   };
     
@@ -105,9 +110,10 @@ function FormLayout() {
     const fetchCuestionarios = async () => {
       try {
         const response = await fetch("/data/cuestionarios.json");
-        if (!response.ok) throw new Error("Error al cargar los datos");
+        if (!response.ok) throw new Error("Error at loading data");
         const data = await response.json();
-        setCuestionarios(cuestionariosJson as FormSection[]);
+        setCuestionarios(data);
+        localStorage.setItem("preguntas-cuestionario", JSON.stringify(data));
         setIsLoading(false);
         if (data.length > 0) {
           setTitle(t(data[0].titulo));
@@ -120,53 +126,15 @@ function FormLayout() {
 
     fetchCuestionarios();
   }, [t]);
-
-  /**
-   * 
-   * Esta función renderiza las respuestas guardadas en el localStorage
-   * 
-   * - Verifica si existen datos guardados en el localStorage bajo la clave "formResponses".
-   * - Si no hay datos, muestra un mensaje indicando que no hay respuestas registradas.
-   * - Si hay datos, convierte el string json a un objeto y muestra las respuestas.
-   * 
-   * @returns {React.ReactElement} Retorna un elemento con las respuestas en caso que hayan.
-   * **/
-  const renderResponses = () => {
-    const saveData = localStorage.getItem("formResponses");
-    if (!saveData) return <p>No hay respuestas registradas</p>;
-
-    const formResponses = JSON.parse(saveData);
-
-    return (
-      <div className="flex flex-col items-center w-150">
-        <h2 className="text-4xl">Respuestas</h2>
-        {cuestionarios.map((cuestionario) => (
-          <div className="flex flex-col items-start w-full">
-            <h3 className="text-2xl">{t(cuestionario.titulo)}</h3>
-            <div className="flex flex-col items-start">
-                
-              {/* Recorremos cada una de las preguntas por cuestionario */}
-              {cuestionario.preguntas.map((pregunta) => {
-                console.log(pregunta);
-                return (
-                  <>
-                    {/* Mostramos la pregunta con su correspondiente traducción */}    
-                    <span>{t(pregunta.pregunta)}</span>
-                    {/* Mostramos la respuesta correspondiente usando el ID de la pregunta como clave */}
-                    <span>{formResponses[pregunta.id]}</span>
-                  </>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   return (
-    <div className="flex justify-center gap-20">
-      <div className="w-[29rem] text-left flex-column">
+    <m.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+      className="flex justify-center gap-30"
+    >
+      <div className="w-lg text-left flex-column">
         <div className="items-center">
           <div className="bg-emerald-400 w-40 h-1 inline-block m-2 mb-0.5"></div>
           <h3 className="mb-5 inline-block">FORMS</h3>
@@ -175,20 +143,22 @@ function FormLayout() {
           - Muestra "¡Completado!" cuando se han respondido todos los cuestionarios (isCompleted = true)
           - Título del cuestionario actual.
         */}
-        <h1 className="uppercase font-bold text-6xl font-righteous mb-5 text-pink-700">
-          {isCompleted ? "¡Completado!" : title}
+        <h1 className="uppercase font-bold text-7xl font-righteous mb-5 text-blue-600">
+          {isCompleted ? t("formComplete.complete") : title}
         </h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque error
-          quis et molestiae impedit? Reiciendis, debitis aliquam ratione
-          maiores, nam dolorum quasi nulla, temporibus quas nemo architecto
-          deleniti saepe consequuntur.
-        </p>
+        <p className="my-5">{description}</p>
+        {isCompleted && (
+          <Button
+            enabled={true}
+            onClick={() => navigate("/results")}
+            text={t("buttons.results")}
+          />
+        )}
         <div className="mt-6">
-            <button className="bg-stone-50 py-2.5 px-6 mr-2 border rounded-full" onClick={handleReset} >
-                RESET
+            <button className="bg-stone-50 py-2.5 px-6 mr-2 border rounded-full uppercase" onClick={handleReset} >
+                Reset
             </button>
-        </div>      
+        </div> 
       </div>
       <div className="flex gap-10 items-center">
         {/* Muestra un mensaje de carga mientras se obtienen los datos de los cuestionarios */}
@@ -214,8 +184,8 @@ function FormLayout() {
                 </li>
               ))}
               <li
-                className={`w-14 flex justify-center items-center h-14 rounded-full    
-                ${isCompleted ? "bg-emerald-400" : "bg-gray-100"}`}
+                className={`w-14 flex justify-center items-center h-14 rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]
+                ${isCompleted ? "bg-emerald-400" : "bg-stone-50"}`}
               >
                 <svg
                   width="21"
@@ -250,12 +220,15 @@ function FormLayout() {
                 onResetComplete={handleResetComplete}
               />
             ) : (
-              <div>{renderResponses()}</div>
+              <div>
+                <img src={robotics} alt="Robot Illustration" />
+                <a href="https://storyset.com/technology" className="text-xs text-blue-400">Technology illustrations by Storyset</a>
+              </div>
             )}
           </>
         )}
       </div>
-    </div>
+    </m.div>
   );
 }
 export default FormLayout;

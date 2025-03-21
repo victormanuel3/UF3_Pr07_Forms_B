@@ -45,5 +45,6 @@ export interface ToolTipProps {
 export interface ButtonProps {
     enabled: boolean
     onClick: () => void
-    icon: ReactNode
+    icon?: ReactNode
+    text?: string
 }
