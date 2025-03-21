@@ -9,20 +9,19 @@ import { FormSection } from "../interfaces/form.interfaces";
 
 /**
  * Componente principal que gestiona la navegación entre los distintos cuestionarios.
- * 
+ *
  * - Controla el estado de progreso de los formularios.
  * - Maneja la carga y visualización dínamica de los cuestionarios.
  * - Permite avanzar y retroceder entre formularios.
  * - Muestra las respuestas cuando se han completado todos los cuestionarios.
- * 
- * @returns {React.ReactElement} 
+ *
+ * @returns {React.ReactElement}
  * - Título dinámico que muestra el título del cuestionario actual o "¡Completado!"
  * - Indicadores de progreso (círculos numerados)
  * - Formulario dinámico del cuestionario actual o resumen de respuestas al finalizar
  * **/
 function FormLayout() {
-
-  const [title, setTitle] = useState(""); // Título del cuestionario actual, 
+  const [title, setTitle] = useState(""); // Título del cuestionario actual,
   const [description, setDescription] = useState("");
   const [progress, setProgress] = useState(1); // índice del cuestionario actual.
   const [cuestionarios, setCuestionarios] = useState<FormSection[]>([]); // Listado de los cuestionarios.
@@ -34,11 +33,11 @@ function FormLayout() {
 
   /**
    * Esta función maneja la navegación al siguiente cuestionario.
-   * 
+   *
    * - Incrementa el progreso actual en 1.
    * - Actualiza el título con el del siguiente formulario, aplicando la traducción
    * - Si se ha llegado al cuestionario final, marca el proceso como completado.
-   * 
+   *
    * @returns {void} no retorna ningún valor, solo actualiza los estados.
    * **/
   const handleNext = () => {
@@ -53,11 +52,11 @@ function FormLayout() {
 
   /**
    * Esta función maneja la navegación al cuestionario anterior.
-   * 
+   *
    * - Verifica que el progreso actual sea mayor a 0.
    * - Decrementa el progreso actual en 1.
    * - Actualiza el título con el del cuestionario anterior.
-   * 
+   *
    * @returns {void} No retorna ningún valor, solo actualiza los estados.
    * **/
   const handlePrev = () => {
@@ -67,26 +66,26 @@ function FormLayout() {
       setDescription(t(cuestionarios[progress - 2].descripcion));
     }
   };
-    
+
   /**
    * Restablece el estado del formulario y reinicia el progreso.
-   * 
+   *
    * - Borra las respuestas guardadas en `localStorage`.
    * - Reinicia el progreso al primer cuestionario.
    * - Restablece el título al primer cuestionario si hay datos.
    * - Activa `shouldResetForm` para indicarle a `DynamicForms` que debe limpiar los datos.
    */
   const handleReset = () => {
-    localStorage.removeItem("formResponses")
-    setProgress(1)  
-    if (isCompleted) setIsCompleted(false)
-    if (cuestionarios.length > 0) setTitle(t(cuestionarios[0].titulo))
+    localStorage.removeItem("formResponses");
+    setProgress(1);
+    if (isCompleted) setIsCompleted(false);
+    if (cuestionarios.length > 0) setTitle(t(cuestionarios[0].titulo));
     setShouldResetForm(true); // Activar el flag para resetear el formulario
-  }
-  
+  };
+
   /**
    * Desactiva `shouldResetForm` tras completar el reinicio del formulario.
-   * 
+   *
    * - Se ejecuta cuando `DynamicForms` ha limpiado los datos y ha confirmado el reset.
    */
   const handleResetComplete = () => {
@@ -96,13 +95,13 @@ function FormLayout() {
   useEffect(() => {
     /**
      * Obtiene los cuestionarios desde el servidor mediante una petición HTTP.
-     * 
+     *
      * - Realiza una solicitud para cargar los cuestionarios en formato JSON.
      * - Maneja el estado de carga (`setIsLoading`).
      * - Guarda los cuestionarios en el estado (`setCuestionarios`).
      * - Si hay cuestionarios disponibles, establece el título del primero (`setTitle`).
      * - Captura errores y los muestra en consola.
-     * 
+     *
      * @async
      * @returns {Promise<void>} No retorna ningún valor, solo actualiza los estados.
      * @throws {Error} Si la respuesta del servidor no es satisfactoria.
@@ -147,18 +146,20 @@ function FormLayout() {
           {isCompleted ? t("formComplete.complete") : title}
         </h1>
         <p className="my-5">{description}</p>
-        {isCompleted && (
+        <div className="flex gap-4">
+          {isCompleted && (
+            <Button
+              enabled={true}
+              onClick={() => navigate("/results")}
+              text={t("buttons.results")}
+            />
+          )}
           <Button
+            onClick={handleReset}
             enabled={true}
-            onClick={() => navigate("/results")}
-            text={t("buttons.results")}
-          />
-        )}
-        <div className="mt-6">
-            <button className="bg-stone-50 py-2.5 px-6 mr-2 border rounded-full uppercase" onClick={handleReset} >
-                Reset
-            </button>
-        </div> 
+            text={"Reset form"}
+          ></Button>
+        </div>
       </div>
       <div className="flex gap-10 items-center">
         {/* Muestra un mensaje de carga mientras se obtienen los datos de los cuestionarios */}
@@ -204,11 +205,11 @@ function FormLayout() {
               </li>
             </ul>
             {/**
-              * Verificamos si todos los formularios han sido respondidos.
-              * 
-              * - Si `isCompleted` es true, se muestran las respuestas registradas.
-              * - Si aún hay formularios pendientes, se muestra el formulario actual.
-              **/}
+             * Verificamos si todos los formularios han sido respondidos.
+             *
+             * - Si `isCompleted` es true, se muestran las respuestas registradas.
+             * - Si aún hay formularios pendientes, se muestra el formulario actual.
+             **/}
             {!isCompleted ? (
               <DynamicForms
                 cuestionarios={cuestionarios}
@@ -222,7 +223,12 @@ function FormLayout() {
             ) : (
               <div>
                 <img src={robotics} alt="Robot Illustration" />
-                <a href="https://storyset.com/technology" className="text-xs text-blue-400">Technology illustrations by Storyset</a>
+                <a
+                  href="https://storyset.com/technology"
+                  className="text-xs text-blue-400"
+                >
+                  Technology illustrations by Storyset
+                </a>
               </div>
             )}
           </>

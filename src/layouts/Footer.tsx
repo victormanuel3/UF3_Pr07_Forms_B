@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import logo from "../../public/img/logo-white.gif";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -22,8 +23,8 @@ const Footer = () => {
             <div className="mb-6 md:mb-0">
               <a href="#" className="flex items-center">
                 <img
-                  src="https://flowbite.com/docs/images/logo.svg"
-                  className="h-8 me-3"
+                  src={logo}
+                  className="h-30 me-3"
                   alt="Logo"
                 />
                 <span className="self-center text-2xl whitespace-nowrap font-righteous">

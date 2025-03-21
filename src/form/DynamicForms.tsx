@@ -1,5 +1,5 @@
 import { motion as m } from "framer-motion";
-import { ReactElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../components/Button";
 import Checkbox from "../components/Checkbox";
@@ -340,7 +340,7 @@ function DynamicForms({
           <Checkbox
             key={pregunta.id}
             label={t(pregunta.pregunta)}
-            options={pregunta.opciones?.map((opcion) => t(opcion)) || []}
+            options={pregunta.opciones || []}
             onSelectOption={(option) =>
               handleCheckboxChange(pregunta.id, option)
             }

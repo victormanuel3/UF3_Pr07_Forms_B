@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { CheckboxProps } from "../interfaces/components.interfaces"
 
 /**
@@ -15,7 +16,8 @@ import { CheckboxProps } from "../interfaces/components.interfaces"
  * @returns {React.ReactElement} Componente de grupo de checkboxes
  */
 function Checkbox<T>({ options, label, selectedOptions, rules, onSelectOption }: CheckboxProps<T>) {
-    
+    const { t } = useTranslation();
+
     /**
      * Verifica si una opción está seleccionada.
      * 
@@ -51,7 +53,7 @@ function Checkbox<T>({ options, label, selectedOptions, rules, onSelectOption }:
                             className="absolute opacity-0 w-5 h-5 cursor-pointer"
                         />
                     </div>
-                    <span className="text-gray-700 text-sm">{String(option)}</span>
+                    <span className="text-gray-700 text-sm">{t(String(option))}</span>
                 </label>
             ))}
         </div>

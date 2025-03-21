@@ -109,6 +109,11 @@
     "start": "Start!",
     "results": "See answers"
   },
+  "header": {
+    "home": "HOME",
+    "forms": "FORM TIME!",
+    "results": "RESULTS"
+  },
   "footer": {
     "resources": "Resources",
     "contact": "Follow us",

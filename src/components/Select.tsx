@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { SelectProps } from "../interfaces/components.interfaces";
-import { useTranslation } from "react-i18next";
 
 /**
  * Componente de selección desplegable personalizado.
@@ -22,7 +21,6 @@ function Select(props: SelectProps) {
   const [isOpen, setIsOpen] = useState(false); // Estado para controlar si el dropdown está abierto
   const selectRef = useRef<HTMLDivElement>(null); // Referencia para detectar clics fuera del componente
 
-  const { t } = useTranslation();
 
     /**
      * Maneja el clic en una opción del menú desplegable.
@@ -72,46 +70,37 @@ function Select(props: SelectProps) {
         };
     }, [isOpen]);
 
-  return (
-    <div className="relative" ref={selectRef}>
-      <label className="flex flex-col gap-2 items-start select-none pointer-events-none">
-        <div className="flex flex-col text-left">
-          {label}
-          <span className="text-xs text-gray-600">{ t("messages.required") }</span>
+    return (
+        <div className="relative" ref={selectRef} >
+            <label className="flex flex-col gap-2 items-start select-none pointer-events-none">
+                <div className="flex flex-col text-left">
+                    {label}
+                    <span className="text-xs text-gray-600">Este campo es obligatorio*</span>
+                </div>
+                <div className="relative h-10 w-full">
+                    <input
+                        type="text"
+                        name={name}
+                        value={value}
+                        placeholder={placeholder}
+                        readOnly
+                        onClick={handleToogleDropdown}
+                        className="h-full w-full pointer-events-auto border border-gray-500 rounded-lg pl-3 outline-none cursor-pointer text-sm"
+                    />
+                    <i className={`fa-sharp fa-regular fa-angle-down absolute top-1/2 right-3 -translate-y-1/2 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}></i>
+                </div>
+            </label> 
+            {isOpen && (
+                <ul className="absolute top-full z-10 mt-0.5 bg-white border border-gray-400 p-0.5 rounded-lg w-full">
+                    {options.map((option) => (
+                        <li className="text-justify px-3 py-1.5 cursor-pointer hover:bg-gray-200 rounded-sm text-sm select-none" key={option} onClick={() => handleOptionClick(option)}>
+                            {option}
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
-        <div className="relative h-10 w-full">
-          <input
-            type="text"
-            name={name}
-            value={value}
-            placeholder={placeholder}
-            readOnly
-            onClick={handleToogleDropdown}
-            className="h-full w-full pointer-events-auto border border-gray-500 rounded-lg pl-3 outline-none cursor-pointer text-sm"
-          />
-          <i
-            className={`fa-sharp fa-regular fa-angle-down absolute top-1/2 right-3 -translate-y-1/2 transition-transform duration-300 ${
-              isOpen ? "rotate-180" : ""
-            }`}
-          ></i>
-        </div>
-      </label>
-            {/* Menú desplegable de opciones, visible solo cuando isOpen es true */}
-      {isOpen && (
-        <ul className="absolute top-full z-10 mt-0.5 bg-white border border-gray-400 p-0.5 rounded-lg w-full">
-          {options.map((option) => (
-            <li
-              className="text-justify px-3 py-1.5 cursor-pointer hover:bg-gray-200 rounded-sm text-sm select-none"
-              key={option}
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
+    )
 }
 
 export default Select;
