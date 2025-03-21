@@ -46,11 +46,11 @@ function Input(props: InputProps) {
                         type="text"
                         value={value}
                         placeholder={placeholder}
-                        onFocus={() => setShowRules(true)} // 
-                        onBlur={() => setShowRules(false)} // 
+                        onFocus={() => setShowRules(true)} // Muestra las reglas de validación cuando el campo recibe el foco 
+                        onBlur={() => setShowRules(false)} // Oculta las reglas de validación cuando el campo pierde el foco
                         onChange={handleChange}
                     />
-                    {/*  */}
+                    {/* Muestra el componente ValidationToolTip si existen reglas, hay más de una regla, y showRules es true */}
                     {rules && rules.length > 0 && showRules && (<ValidationToolTip rules={rules} launched={launched}/>)}
                 </div>
             </label>

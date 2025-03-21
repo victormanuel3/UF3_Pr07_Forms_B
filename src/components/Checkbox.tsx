@@ -1,7 +1,27 @@
 import { CheckboxProps } from "../interfaces/components.interfaces"
 
+/**
+ * Componente personalizado de Checkbox que permite seleccionar múltiples opciones.
+ * 
+ * - Recibe la lista de opciones disponibles, opciones seleccionadas y reglas de validación
+ * - Permite seleccionar/deseleccionar opciones mediante la función onSelectOption
+ * - Muestra mensajes de validación según las reglas
+ * 
+ * @param {Array<T>} options - Lista de opciones disponibles para seleccionar
+ * @param {string} label - Etiqueta descriptiva para el grupo de checkboxes
+ * @param {Array<T>} selectedOptions - Lista de opciones actualmente seleccionadas
+ * @param {Array} rules - Reglas de validación con mensajes a mostrar
+ * @param {function} onSelectOption - Función que se ejecuta al seleccionar/deseleccionar una opción
+ * @returns {React.ReactElement} Componente de grupo de checkboxes
+ */
 function Checkbox<T>({ options, label, selectedOptions, rules, onSelectOption }: CheckboxProps<T>) {
     
+    /**
+     * Verifica si una opción está seleccionada.
+     * 
+     * @param {T} option - Opción a verificar
+     * @returns {boolean} Verdadero si la opción está en la lista de seleccionadas
+     */
     const IsSelected = (option: T) => {
         return selectedOptions.includes(option)
     }
@@ -10,10 +30,12 @@ function Checkbox<T>({ options, label, selectedOptions, rules, onSelectOption }:
         <div className="flex flex-col gap-1.5 select-none">
             <div className="flex flex-col text-left mb-2 select-none">
                 <span className="flex">{label}</span>
+                {/* Mensajes de validación */}
                 {rules?.map((rule, index) => (
                     <span key={index} className="text-xs text-gray-600">{rule.message}</span>
                 ))}
             </div>
+            {/* Lista de opciones de checkbox */}
             {options.map((option, index) => (
                 <label key={index} className="flex items-center gap-2 cursor-pointer">
                     <div className={`flex items-center justify-center w-5 h-5 bg-white ${IsSelected(option) ? 'border-emerald-400 border-2' : 'border-gray-400 border-1'}`}>
