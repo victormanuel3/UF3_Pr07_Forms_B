@@ -24,7 +24,7 @@ const Footer = () => {
               <a href="#" className="flex items-center">
                 <img
                   src={logo}
-                  className="h-30 me-3"
+                  className="h-20 me-3"
                   alt="Logo"
                 />
                 <span className="self-center text-2xl whitespace-nowrap font-righteous">
