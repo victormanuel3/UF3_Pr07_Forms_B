@@ -59,6 +59,24 @@ function DynamicForms({
   const [isFormValid, setIsFormValid] = useState(false); 
 
   /**
+   * Estado que indica si formulario es válido.
+   * - Se actualiza si todos los campos cumplen las reglas de validación.
+   */
+  const [isFormValid, setIsFormValid] = useState(false); 
+
+  useEffect(() => {
+    // Si 'shouldReset' es 'true', significa que el componente padre ('FormLayout') solicitó un reinicio
+    if (shouldReset) {
+      setFormData({}); // Borra todas las respuestas del formulario
+      
+      // Notifica al padre que el reset se ha completado, lo que desactiva 'shouldResetForm' en 'FormLayout'
+      if (onResetComplete) {
+        onResetComplete();
+      }
+    }
+  }, [shouldReset, onResetComplete]);
+
+  /**
    * Este useEffect prepara valores iniciales vacíos para cada pregunta del formulario.
    * 
    * - Comprueba si hay un formulario que mostrar.
